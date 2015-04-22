@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<!--[if IE 8 ]> <html class="ie8" class="no-js" lang="en" xmlns:fb="http://www.facebook.com/2008/fbml" xmlns:og="http://opengraphprotocol.org/schema/"> <![endif]-->
+<!--[if IE 9 ]> <html class="ie9" class="no-js" lang="en" xmlns:fb="http://www.facebook.com/2008/fbml" xmlns:og="http://opengraphprotocol.org/schema/"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html class=""> <!--<![endif]-->
+<head>
+<script>
+if (window.location.protocol == "https:") {
+var _sslurl = window.location.href.replace("https://", "http://");
+window.location.replace(_sslurl);
+window.location.href = _sslurl;
+}
+</script>
+<title>Ebola Outbreak 2015: Full Coverage - ABC News</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="robots" content="noarchive" />
+<meta name="robots" content="index, follow" />
+<meta name="author" content="ABC News" />
+<meta name="copyright" content="Copyright (c) 2015 ABC News Internet Ventures" />
+<meta name="description" content="Get the latest news, videos and photos about the spread of the Ebola virus in Sierra Leone, Guinea, and other places in West Africa from ABC News." />
+<meta name="keywords" content="Ebola outbreak, Ebola virus, Ebola outbreak 2014, Ebola sierra Leone, Ebola news, Ebola Guinea, Ebola Liberia, Ebola 2014, Ebola outbreak in Africa, health news, medical news, medical articles" />
+<script type="text/javascript">
+window.timeoutID = window.setTimeout(function() { refreshTimer() }, 600000);
+var refreshTimer = function() {
+location.reload();
+}
+</script>
+<meta property="fb:admins" content="704409894" />
+<meta property="fb:app_id" content="4942312939" />
+<meta name="fb_title" content="Ebola Outbreak: Full Coverage" />
+<meta property="og:site_name" content="ABC News" />
+<meta property="og:title" content="Ebola Outbreak: Full Coverage" />
+<meta property="og:description" content="Get the latest news, videos and photos about the spread of the Ebola virus in Sierra Leone, Guinea, and other places in West Africa from ABC News." />
+<meta property="og:url" content="http://abcnews.go.com/Health/ebola" />
+<link type="text/css" rel="stylesheet" href="http://a.abcnews.com/assets/scss/css/indexv2.css?v=50" />
+<link type="text/css" rel="stylesheet" href="http://a.abcnews.com/assets/scss/css/nav_sub.css?v=50" />
+<link id="canonical" rel="canonical" href="http://abcnews.go.com/Health/ebola" />
+<link rel="alternate" type="application/rss+xml" title="RSS Feed" href="http://feeds.abcnews.com/abcnews/healthheadlines" />
+<script type="text/javascript" src="//fonts.abcnews.com/kyb8pht.js"></script>
+<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+<script type="text/javascript" src="http://a.abcnews.com/assets/js/min/indexv2.js?v=42"></script>
+<!--[if lt IE 9]><script type="text/javascript" src="http://a.abcnews.com/assets/js/html5shiv.js"></script><![endif]-->
+<script type="text/javascript" src="http://cdn.optimizely.com/js/168844516.js" async></script>
+<link type="text/css" rel="stylesheet" href="http://a.abcnews.com/assets/scss/css/videolightbox.css?v=50" />
+<script type="text/javascript" src="http://a.abcnews.com/assets/js/min/videolightbox.js?v=42"></script>
+<script type="text/javascript">
+var gapiCookie = readCookie('gapi-session');
+if(gapiCookie==null) {
+createCookie('gapi-session', true, 1);
+var gapiSession = "Google Login False";
+function gapiCallback() {
+sessionParams = {
+'client_id': '770533044703-gvc902tcl72eh6j1mitucl7g3o9bkp7s.apps.googleusercontent.com',
+'session_state': null
+};
+gapi.auth.checkSessionState(sessionParams, function(state) {
+if(!state){//logged in
+gapiSession = "Google Login True";
+}
+setTimeout(function(){
+if(typeof s_omni != "undefined"){
+s_omni.pe = "lnk_o";
+s_omni.pev2 = gapiSession;
+s_omni.t();
+}
+}, 2000);
+});
+}
+(function(){
+var ge = document.createElement("script");
+ge.type = "text/javascript"; ge.async = true;ge.src = "https://apis.google.com/js/client.js?onload=gapiCallback";
+var scr = document.getElementsByTagName("script")[0];
+scr.parentNode.insertBefore(ge, scr);
+})();
+}
+</script>
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-225447-1', 'go.com');
+ga('send', 'pageview');
+</script>
+<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js?pub=abcnews" async></script>
+<script type="text/javascript">
+var digAdData;
+var digGetAd = function(){};
+tq = new Object();
+tq.path = '/Health/ebola/subindex/';
+tq.caid = 'Health';
+tq.keywords = ((tq.keywords)&&(tq.keywords!='NoPharma'))?tq.keywords+'NoPharma':'NoPharma';
+tq.show = '';
+tq.recipes = '';
+tq.id = '24808980';
+tq.section = 'health';
+tq.realsection = '';
+tq.subsection = 'ebola';
+tq.altsection = '';
+tq.objType = 'subindex';
+tq.byline = '';
+tq.othersubs = '';
+</script>
+<script type="text/javascript">
+if(tq.path){
+tq.urlTargetPath = (tq.path)?tq.path:window.location.pathname;
+tq.urlTargetPath = (tq.urlTargetPath == '/')?'/index':tq.urlTargetPath;
+tq.urlKeywords = (tq.keywords)?tq.keywords:'';
+tq.urlRecipes = (tq.recipes)?tq.recipes:'';
+tq.urlShow = (tq.show)?tq.show:'';
+tq.urlFullQuery = '&tqkw='+encodeURI(tq.urlKeywords)+'&tqshow='+encodeURI(tq.urlShow)+encodeURI(tq.urlRecipes)+'&url='+encodeURI(tq.urlTargetPath);
+}else{
+tq.urlFullQuery = '&url='+encodeURI(window.location.pathname);
+}
+var fwNetworkId = '168234'
+var fwSectionFallbackId = '109523';
+var fwAdSystem = true;
+</script>
+<script type="text/javascript" src="http://a.abcnews.com/assets/js/min/fw.js?v=35"></script>
+<script type="text/javascript">digGetAd("FPBranding");</script>
+</head>
+<body>
+<a name="top"></a><div class="window"><div class="indexv2">
+<!--[if gte IE 9]>
+<link rel="stylesheet" type="text/css" href="http://a.abcnews.com/assets/css/ie9.css?v=50" />
+<![endif]-->
+<!--[if lt IE 9]>
+<link rel="stylesheet" type="text/css" href="http://a.abcnews.com/assets/css/ie7_8.css?v=50" />
+<![endif]-->
+<nav id="nav" class="nav_subindex" role="navigation">
+<div id="nav_bot_flex">
+<ul id="nav_bot">
+<li class="nav_now topic">Now</li>
+<li class="topic abcn_t1"><a href="http://abcnews.go.com/International/elian-gonzalez-boy-middle-us-cuba-tug-war/story?id=30484529" name="lpos=nav[searchtopics_subindex]&lid=link[Elian Gonzalez]">Elian Gonzalez</a></li><li class="dot_ abcn_b1">&#149;</li><li class="topic abcn_t2"><a href="http://abcnews.go.com/Technology/google-doodle-celebrates-earth-day-quiz/story?id=30497421" name="lpos=nav[searchtopics_subindex]&lid=link[Earth Day Quiz]">Earth Day Quiz</a></li><li class="dot_ abcn_b2">&#149;</li><li class="topic abcn_t3"><a href="http://abcnews.go.com/Entertainment/ben-affleck-addresses-controversy-slave-owning-ancestor/story?id=30497521" name="lpos=nav[searchtopics_subindex]&lid=link[Ben Affleck]">Ben Affleck</a></li><li class="dot_ abcn_b3">&#149;</li><li class="topic abcn_t4"><a href="http://abcnews.go.com/Business/earth-day-2015-freebies-deals/story?id=30497750" name="lpos=nav[searchtopics_subindex]&lid=link[Earth Day 2015]">Earth Day 2015</a></li><li class="dot_ abcn_b4">&#149;</li><li class="topic abcn_t5"><a href="http://abcnews.go.com/Entertainment/amy-schumer-photobombs-kim-kardashian-kanye-west/story?id=30498958" name="lpos=nav[searchtopics_subindex]&lid=link[Amy Schumer]">Amy Schumer</a></li><li class="dot_ abcn_b5">&#149;</li><li class="topic abcn_t6"><a href="http://abcnews.go.com/Technology/lyrid-meteor-shower-peaks-todays-unpredictable-show/story?id=30477086" name="lpos=nav[searchtopics_subindex]&lid=link[Lyrid Meteor Shower]">Lyrid Meteor Shower</a></li>
+</ul>
+<div class="clearboth"><!-- empty --></div>
+</div>
+<div id="nav_top_flex">
+<ul id="nav_top">
+<li class="nav_gma show">
+<a href="http://abcnews.go.com/gma" name="lpos=nav[header_subindex]&lid=section[Good Morning America]">Good Morning America</a>
+</li>
+<li class="nav_wn show">
+<a href="http://abcnews.go.com/wn" name="lpos=nav[header_subindex]&lid=section[World News]">World News Tonight</a>
+</li>
+<li class="nav_nl show">
+<a href="http://abcnews.go.com/nightline" name="lpos=nav[header_subindex]&lid=section[Nightline]">Nightline</a>
+</li>
+<li class="nav_2020 show">
+<a href="http://abcnews.go.com/2020" name="lpos=nav[header_subindex]&lid=section[20/20]">20/20</a>
+</li>
+<li class="nav_tw show">
+<a href="http://abcnews.go.com/thisweek" name="lpos=nav[header_subindex]&lid=section[This Week]">This Week</a>
+</li>
+<li class="nav_social">
+<div id="share-bar" class="share_top">
+<div class="share_group">
+<div class="fb-like" data-href="https://www.facebook.com/abcnews" data-send="false" data-layout="button_count" data-width="90" data-show-faces="false" data-colorscheme="light" data-action="like"></div>
+<a href="https://twitter.com/abc" class="twitter-follow-button" data-show-count="false" data-show-screen-name="false"></a>
+<div class="clearboth"><!-- empty --></div>
+</div>
+</div>
+</li>
+<li class="nav_signin">
+<a href="#" name="lpos=nav[header_subindex]&lid=section[Sign In]" id="abcn_signin">Sign In</a>
+</li>
+<li class="nav_search">
+<form id="search_form" action="http://abcnews.go.com/search" onsubmit="return tgSearch(this);">
+<input type="text" id="search_input" name="searchtext" value="Search" maxlength="100" class="watermarkOn" />
+<input type="image" id="search_image" name="Search" alt="Search" src="http://a.abcnews.com/assets/images/navigation/search.png" />
+</form>
+</li>
+</ul>
+<div class="clearboth"><!-- --></div>
+</div>
+<div id="nav_mid_flex">
+<ul id="nav_mid">
+<li id="pearl" itemscope itemtype="http://schema.org/Organization">
+<a itemprop="url" href="http://abcnews.go.com" name="lpos=nav[header_subindex]&lid=[Logo]">
+<img itemprop="logo" src="http://a.abcnews.com/assets/images/navigation/abc-logo.png" width="162" height="58" alt="ABC News" border="0" />
+</a>
+</li>
+<li class="nav_home section">
+<a href="http://abcnews.go.com" name="lpos=nav[header_subindex]&lid=section[Home]">Home</a>
+</li>
+<li class="nav_video section">
+<a href="http://abcnews.go.com/video" name="lpos=nav[header_subindex]&lid=section[Video]">Video</a>
+</li>
+<li class="nav_us section">
+<a href="http://abcnews.go.com/us" name="lpos=nav[header_subindex]&lid=section[U.S.]">U.S.</a>
+</li>
+<li class="nav_world section">
+<a href="http://abcnews.go.com/international" name="lpos=nav[header_subindex]&lid=section[World]">World</a>
+</li>
+<li class="nav_politics section">
+<a href="http://abcnews.go.com/politics" name="lpos=nav[header_subindex]&lid=section[Politics]">Politics</a>
+</li>
+<li class="nav_entertainment section">
+<a href="http://abcnews.go.com/entertainment" name="lpos=nav[header_subindex]&lid=section[Entertainment]">Entertainment</a>
+</li>
+<li class="nav_tech section">
+<a href="http://abcnews.go.com/technology" name="lpos=nav[header_subindex]&lid=section[Tech]">Tech</a>
+</li>
+<li class="nav_health section">
+<a href="http://abcnews.go.com/health" name="lpos=nav[header_subindex]&lid=section[Health]">Health</a>
+</li>
+<li class="nav_lifestyle section">
+<a href="http://abcnews.go.com/lifestyle" name="lpos=nav[header_subindex]&lid=section[Lifestyle]">Lifestyle</a>
+</li>
+<li class="nav_money section">
+<a href="http://abcnews.go.com/business" name="lpos=nav[header_subindex]&lid=section[Money]">Money</a>
+</li>
+<li class="nav_shows section">
+<a href="#" id="more_active">Shows</a>
+<ul>
+<li><a href="http://abcnews.go.com/gma" name="lpos=nav[subnav_subindex]&lid=section[GMA]">GMA</a></li>
+<li><a href="http://abcnews.go.com/wn" name="lpos=nav[subnav_subindex]&lid=section[World News]">World News Tonight</a></li>
+<li><a href="http://abcnews.go.com/nightline" name="lpos=nav[subnav_subindex]&lid=section[Nightline]">Nightline</a></li>
+<li><a href="http://abcnews.go.com/2020" name="lpos=nav[subnav_subindex]&lid=section[20/20]">20/20</a></li>
+<li><a href="http://abcnews.go.com/thisweek" name="lpos=nav[subnav_subindex]&lid=section[This Week]">This Week</a></li>
+</ul>
+</li>
+<li class="nav_more section">
+<a href="#" id="more_active">More</a>
+<ul>
+<li><a href="http://abcnews.go.com/blotter" name="lpos=nav[subnav_subindex]&lid=section[Investigative]">Investigative</a></li>
+<li class="subnav_money"><a href="http://abcnews.go.com/business" name="lpos=nav[subnav_subindex]&lid=section[Money]">Money</a></li>
+<li><a href="http://abcnews.go.com/sports" name="lpos=nav[subnav_subindex]&lid=section[Sports]">Sports</a></li>
+<li><a href="http://abcnews.go.com/us/good_news" name="lpos=nav[subnav_subindex]&lid=section[Good News]">Good News</a></li>
+<li><a href="http://abcnews.go.com/photos" name="lpos=nav[subnav_subindex]&lid=section[Photos]">Photos</a></li>
+<li><a href="http://fusion.net" target="_blank" name="lpos=nav[subnav_subindex]&lid=section[Fusion]">Fusion</a></li>
+<li><a href="http://jobs.abcnews.com" name="lpos=nav[subnav_subindex]&lid=section[Job Search]">Job Search</a></li>
+<li><a href="http://abcnews.go.com/live" name="lpos=nav[subnav_subindex]&lid=section[Live]">Live</a></li>
+</ul>
+</li>
+<li class="nav_weather">
+<span class="gear">
+<img src="http://a.abcnews.com/assets/images/navigation/gear_icon.png" border="0" width="10" height="10" />
+</span>
+<div class="weather_wrapper"></div>
+<div class="weather_panel">
+<form class="weather_location" onsubmit="weather_submit();return false;">
+<label class="weather_location_label">Weather Preferences</label>
+<input class="weather_location_input" type="text" maxlength="5" value="Enter Zip Code">
+<div class="weather_btns">
+<p class="weather_btn_cancel weather_btn_ui">Cancel</p>
+<p class="weather_btn_set weather_btn_ui">Set</p>
+<div class="clearboth"></div>
+</div>
+</form>
+</div>
+</li>
+</ul>
+<div class="clearboth"></div>
+</div>
+<div id="nav_shade"><!-- bg --></div>
+<div id="subHeadWidgets" class="abc_wide">
+<!--widget[ABCTop_1_breakingnews_24808980]-->
+</div>
+<div class="clearboth"><!-- --></div>
+</nav>
+<div class="short_nav">
+<div id="nav_short_flex">
+<ul id="nav_short">
+<li id="pearl">
+<a href="http://abcnews.go.com" name="lpos=nav[header_fixed_subindex]&lid=[Logo]">
+<img src="http://a.abcnews.com/assets/images/navigation/abc-logo-small.png" width="92" height="35" alt="ABC News" border="0" />
+</a>
+</li>
+<li class="nav_home section">
+<a href="http://abcnews.go.com" name="lpos=nav[header_fixed_subindex]&lid=section[Home]">Home</a>
+</li>
+<li class="nav_video section">
+<a href="http://abcnews.go.com/video" name="lpos=nav[header_fixed_subindex]&lid=section[Video]">Video</a>
+</li>
+<li class="nav_us section">
+<a href="http://abcnews.go.com/us" name="lpos=nav[header_fixed_subindex]&lid=section[U.S.]">U.S.</a>
+</li>
+<li class="nav_world section">
+<a href="http://abcnews.go.com/international" name="lpos=nav[header_fixed_subindex]&lid=section[World]">World</a>
+</li>
+<li class="nav_politics section">
+<a href="http://abcnews.go.com/politics" name="lpos=nav[header_fixed_subindex]&lid=section[Politics]">Politics</a>
+</li>
+<li class="nav_entertainment section">
+<a href="http://abcnews.go.com/entertainment" name="lpos=nav[header_fixed_subindex]&lid=section[Entertainment]">Entertainment</a>
+</li>
+<li class="nav_tech section">
+<a href="http://abcnews.go.com/technology" name="lpos=nav[header_fixed_subindex]&lid=section[Tech]">Tech</a>
+</li>
+<li class="nav_health section">
+<a href="http://abcnews.go.com/health" name="lpos=nav[header_fixed_subindex]&lid=section[Health]">Health</a>
+</li>
+<li class="nav_lifestyle section">
+<a href="http://abcnews.go.com/lifestyle" name="lpos=nav[header_fixed_subindex]&lid=section[Lifestyle]">Lifestyle</a>
+</li>
+<li class="nav_money section">
+<a href="http://abcnews.go.com/business" name="lpos=nav[header_fixed_subindex]&lid=section[Money]">Money</a>
+</li>
+<li class="nav_more section">
+<a href="#" id="more_active">More</a>
+<ul>
+<li><a href="http://abcnews.go.com/blotter" name="lpos=nav[subnav_fixed_subindex]&lid=section[Investigative]">Investigative</a></li>
+<li><a href="http://abcnews.go.com/sports" name="lpos=nav[subnav_fixed_subindex]&lid=section[Sports]">Sports</a></li>
+<li><a href="http://abcnews.go.com/us/good_news" name="lpos=nav[subnav_fixed_subindex]&lid=section[Good News]">Good News</a></li>
+<li><a href="http://abcnews.go.com/photos" name="lpos=nav[subnav_fixed_subindex]&lid=section[Photos]">Photos</a></li>
+<li><a href="http://jobs.abcnews.com" name="lpos=nav[subnav_subindex]&lid=section[Job Search]">Job Search</a></li>
+<li><a href="http://fusion.net" target="_blank" name="lpos=nav[subnav_fixed_subindex]&lid=section[Fusion]">Fusion</a></li>
+<li><a href="http://abcnews.go.com/live" name="lpos=nav[subnav_fixed_subindex]&lid=section[Live]">Live</a></li>
+</ul>
+</li>
+</ul>
+<div class="clearboth"><!-- empty --></div>
+</div>
+</div>
+<div class="short_bg">
+<div class="short_shadow"><!-- --></div>
+</div>
+<div id="fb-root"></div>
+<script type="text/javascript">
+window.fbAsyncInit = function() {
+FB.init({
+appId: 'fa71b3ce3ced40d47a4850f185b245d9',
+channelUrl: 'http://a.abcnews.go.com/assets/static/perm_cache/channel.html',
+status: true,
+xfbml: true
+});
+};
+(function(doc, script) {
+var js,
+fjs = doc.getElementsByTagName(script)[0],
+add = function(url, id) {
+if (doc.getElementById(id)) {return;}
+js = doc.createElement(script);
+js.src = url; js.async = true;
+id && (js.id = id);
+fjs.parentNode.insertBefore(js, fjs);
+};
+// Facebook SDK
+add('//connect.facebook.net/en_US/all.js', 'facebook-jssdk');
+// Twitter SDK
+add('//platform.twitter.com/widgets.js', 'twitter-wjs');
+}(document, 'script'));
+$('#abcn_signin').attr('href','https://register.go.com/global/login?appRedirect='+ encodeURIComponent(window.location));
+setTimeout(function() {
+$("#nav_shade, #nav_top li, #nav_mid .section, #nav_mid #nav_weather, #nav_bot li, #nav_top .nav_search").addClass("abcn_v");
+}, 400);
+setTimeout(function() {
+$("#nav_top .share_group").css('visibility','visible');
+}, 2500);
+$('.short_nav').waypoint('sticky', {
+wrapper: '<div class="short_nav_wrapper" />',
+stuckClass: 'nav_stuck',
+offset:20,
+handler: function(dir) {
+if(dir==='down'){
+$('.nav_stuck').animate({top:'0'}, 250, 'linear', function() {
+//done
+});
+} else {
+$('.short_nav').css("top","-60px");
+}
+}
+});
+$('.short_bg').waypoint('sticky', {
+wrapper: '<div class="short_bg_wrapper" />',
+stuckClass: 'short_stuck',
+offset:20,
+handler: function(dir) {
+if(dir==='down'){
+$('.short_stuck').animate({top:'0'}, 250, 'linear', function() {
+//done
+});
+}else {
+$('.short_bg').css("top","-60px");
+}
+}
+});
+$(document).ready(function(){
+$("#search_input").focus(function() {
+$(this).filter(function() {
+//do if nothing entered
+return $(this).val() == "" || $(this).val() == "Search"
+}).removeClass("watermarkOn").val("");
+});
+$("#search_input").blur(function() {
+$(this).filter(function() {
+//do if nothing entered
+return $(this).val() == ""
+}).addClass("watermarkOn").val("Search");
+});
+});
+</script>
+<div id="bannerad">
+<div class="banneradcontainer">
+<script type="text/javascript">digGetAd("Banner");</script>
+</div>
+</div>
+<div class="bodycontainer">
+<div id="indexV2-r1" class="abc_wide">
+<!--widget[ABCTop_1_canvas_24808980_subindex]--><div class="canvas" id="canvas-24811091"><center><img src="/images/Site/ebola_outbreak_header_2.jpg" border="0"></center><div class="clearboth"><!--empty--></div></div>
+</div>
+<div id="indexV2-r2" class="abc_mid">
+<div class="ab_cont">
+<div class="ab_col">
+<!--widget[ABTop_1_spev8_24808980_subindex]-->
+<script type="text/javascript">
+// <![CDATA[
+var spev8 = new Object();
+spev8.videoPlaying = false;
+spev8.videoPlayingID = false;
+spev8.videoHasPlayed = false;
+spev8.currPTLink = false;
+spev8.state = 'loading';
+blockLoadFrame = false;
+playerLoaded = false;
+spev8.loadFrame = function(mediaId, nodeId, validVideo) {
+if(playerLoaded == true){
+this.id = mediaId;
+this.node = nodeId;
+this.video = validVideo;
+this.showItem(nodeId);
+if(this.video){
+if((this.id==this.videoPlayingID) && (!spev8.videoHasPlayed)) {//____________________________ resume video already in player
+if(!blockLoadFrame){
+this.quickHideImage();
+this.showPlayer();
+}
+amp.play()
+this.videoPlaying = true;
+} else {//______________________________________________________________________ new video request
+if(spev8.state == "play"){
+amp.pause();
+blockLoadFrame = false;
+}
+}
+} else {
+if(this.videoPlaying) {
+amp.pause();
+}
+this.videoPlaying = false;
+blockLoadFrame = false;
+}
+} else {
+this.id = mediaId;
+this.showItem(nodeId);
+}
+}
+spev8.previewLinkOpen = function(id,isVideo){
+if(spev8.currPTLink){
+if(ptObjId == '#s8thlink-'+id){
+if(isVideo){
+if(!this.videoPlaying) {
+blockLoadFrame = true;
+spev8.loadListOnclick(id);
+}
+}else{
+location.href = spev8.currPTLink.href;
+blockLoadFrame = false;
+}
+}
+}
+ptObjId = '#s8thlink-'+id;
+spev8.currPTLink = document.getElementById('s8thlink-'+id);
+}
+spev8.loadListOnclick = function(id){
+spev8.id = id;
+spev8.loadList(null, id, true, true);
+}
+spev8.showItem = function(nodeId) {
+metaPlaylist.gotoItem('spev8-'+nodeId);
+$('div.wi-container').removeClass('active');
+$('div#video-'+this.id).addClass('active');
+if(this.id!=this.videoPlayingID) {
+//setTimeout(spev8.hidePlayerShowImage, 300);
+spev8.hidePlayerShowImage();
+}
+//__________________________________________________________ start onclick event listener to handle preview layer clicks
+spev8.previewLinkOpen(this.id, this.video);
+}
+spev8.hidePlayerShowImage = function() {
+document.getElementById('s8-image-container').style.display = 'block';
+document.getElementById('s8-image-container').style.zIndex = '10000';
+if(document.getElementById('spev8-MediaPlayer')) {
+document.getElementById('spev8-MediaPlayer').style.zIndex = '0';
+document.getElementById('spev8-MediaPlayer').style.top = '-1000px';
+}
+}
+spev8.loadList = function() {
+pc.playVideoByCID({id:this.id});
+if (this.videoPlayingID == false) {
+amp.play();
+}
+spev8.hideImageShowPlayer();
+this.videoPlayingID = this.id;
+this.videoPlaying = true;
+this.videoHasPlayed = false;
+}
+spev8.hideImageShowPlayer = function() {
+//setTimeout(this.imageFadeOut, 1100);
+//setTimeout(this.showPlayer, 1100);
+this.imageFadeOut();
+this.showPlayer();
+}
+spev8.imageFadeOut = function() {
+$('#s8-image-container').fadeOut(100, function() {
+// Animation complete
+});
+}
+spev8.showPlayer = function() {
+document.getElementById('spev8-MediaPlayer').style.zIndex = '10000';
+document.getElementById('spev8-MediaPlayer').style.top = '10px';
+}
+spev8.quickHideImage = function() {
+document.getElementById('s8-image-container').style.display = 'none';
+}
+spev8.removeAdOverlay = function() {
+if(window.spev8Overlay.style.display=='block') {
+window.spev8Overlay.style.display = 'none';
+}
+}
+spev8.showAdOverlay = function() {
+if(window.spev8Overlay){
+window.spev8Overlay.style.display='block';
+}
+}
+spev8.ready = function() {
+document.getElementById('spev8-MediaPlayer').style.zIndex = '0';
+document.getElementById('spev8-MediaPlayer').style.top = '-1000px';
+playerLoaded = true;
+spev8.state = "ready";
+spev8.removeAdOverlay();
+}
+spev8.reset = function() {
+this.isVideoPlaying = false;
+if(window.spev8ImageContainer){//show image on top of player when video ends
+spev8.hidePlayerShowImage();
+spev8.videoHasPlayed = true;
+spev8.videoPlaying = false;
+blockLoadFrame = false;
+}
+}
+// ]]>
+</script>
+<div id="spev8">
+<div class="midcontainer">
+<div id="mediaContainer">
+<div class="mainMeta" id="mainMeta">
+<div class="spev8-Media" id="spev8-Media">
+<a name="lpos=widget[ABTop_1_spev8_24808980_subindex]&amp;lid=view[Image]" href="/Health/kaci-hickox-humbled-courts-decision/story?id=26608167"><div id="s8-image-container"><img src="http://a.abcnews.com/images/Health/HT_Kaci_Hickox_ml_141031_16x9_992.jpg" border="0" width="640" height="360" alt="PHOTO: Nurse Kaci Hickox speaks to the press, Oct. 31, 2014 in Fort Kent, Maine." /><div class="s8-image-credit-bg"><!-- bg --></div>
+<div class="photo-credit">ABC News</div>
+</div></a>
+</div>
+<script type="text/javascript">
+var s8_credit_w = $('.photo-credit').width();
+var s8_credit_h = $('.photo-credit').height();
+$('.s8-image-credit-bg').css({'width': s8_credit_w, 'height': s8_credit_h});
+</script>
+<div id="s8meta" class="s8meta">
+<div class="headline spev8-medium">
+<a name="lpos=widget[ABTop_1_spev8_24808980_subindex]&amp;lid=[Headline]" href="/Health/kaci-hickox-humbled-courts-decision/story?id=26608167">What Kaci Hickox Has to Say About Court's...</a>
+</div>
+</div>
+<div class="clearboth"><!--empty--></div>
+</div>
+<div class="clearboth"><!--empty--></div>
+</div>
+<div class="videoPlaylistContainer">
+<div id="videoPlaylist" class="videoPlaylist">
+<div id="videoAdOverlay"><!--empty--></div>
+<ul>
+<li>
+<div id="video-26608167" class="wi-container wi-container-1 active">
+<a id="s8thlink-26608167" name="lpos=widget[ABTop_1_spev8_24808980_subindex]&amp;lid=[Thumb]" class="no_overlay" onclick="spev8.loadFrame(26608167, 26608167, false); return false;" href="/Health/kaci-hickox-humbled-courts-decision/story?id=26608167">
+<div>
+<div class="wi-img">
+<img src="http://a.abcnews.com/images/Health/HT_Kaci_Hickox_ml_141031_4x3t_144.jpg" border="0" width="100" height="75" alt="PHOTO: Nurse Kaci Hickox speaks to the press, Oct. 31, 2014 in Fort Kent, Maine." />
+</div>
+<div class="itemHead-wrapper">
+<div class="viewH">
+What Kaci Hickox Has to Say About...
+</div>
+</div>
+<div class="clearboth"><!-- clear --></div>
+</div>
+</a>
+</div>
+</li>
+<li>
+<div id="video-26601928" class="wi-container wi-container-2">
+<a id="s8thlink-26601928" name="lpos=widget[ABTop_1_spev8_24808980_subindex]&amp;lid=[Thumb]" class="no_overlay" onclick="spev8.loadFrame(26601928, 26601928, false); return false;" href="/US/inside-isolation-ward-nina-pham-treated-ebola/story?id=26601928">
+<div>
+<div class="wi-img">
+<img src="http://a.abcnews.com/images/Health/141031_abc_hazmat3_4x3t_144.jpg" border="0" width="100" height="75" alt="VIDEO: How to Properly Put on a Hazmat Suit" />
+</div>
+<div class="itemHead-wrapper">
+<div class="viewH">
+Look Inside Isolation Ward That Treated...
+</div>
+</div>
+<div class="clearboth"><!-- clear --></div>
+</div>
+</a>
+</div>
+</li>
+<li>
+<div id="video-26599985" class="wi-container wi-container-3 last">
+<a id="s8thlink-26599985" name="lpos=widget[ABTop_1_spev8_24808980_subindex]&amp;lid=[Thumb]" class="no_overlay" onclick="spev8.loadFrame(26599985, 26599985, false); return false;" href="/Health/kaci-hickox-quarantined-awaits-hearing-judge-rules/story?id=26599985">
+<div>
+<div class="wi-img">
+<img src="http://a.abcnews.com/images/Health/ap_Kaci_Hickox_wy_141031_4x3t_144.jpg" border="0" width="100" height="75" alt="PHOTO: Nurse Kaci Hickox leaves her home on a rural road in Fort Kent, Maine, to take a bike ride with her boyfriend Ted Wilbur, Oct. 30, 2014. " />
+</div>
+<div class="itemHead-wrapper">
+<div class="viewH">
+No Quarantine for Nurse While She Awaits...
+</div>
+</div>
+<div class="clearboth"><!-- clear --></div>
+</div>
+</a>
+</div>
+</li>
+</ul>
+</div>
+<div class="clearboth"><!--empty--></div>
+</div>
+</div>
+</div>
+<script type="text/javascript" language="JavaScript">
+// <![CDATA[
+window.infoPane = new Pane("mainMeta");
+window.infoPane.addOnload(function(){
+var p = window.infoPane;
+var c = p.content;
+if(c!=null){
+var ih = p.contentHeight;
+p.host.style.height = ih+"px";
+p.getHostDimensions();
+}
+});
+// ]]>
+</script>
+<script type="text/javascript" language="JavaScript">
+// <![CDATA[
+metaPlaylist = new Playlist('metaPlaylist');
+metaMan = new UrlPlaylistManager(metaPlaylist);
+metaMan.pane = window.infoPane;
+metaMan.addItem("spev8-26608167","/widgets/spev8/meta?id=26608167&pid=null&lpos=ABTop_1_spev8_24808980_subindex&");
+metaMan.addItem("spev8-26601928","/widgets/spev8/meta?id=26601928&pid=null&lpos=ABTop_1_spev8_24808980_subindex&");
+metaMan.addItem("spev8-26599985","/widgets/spev8/meta?id=26599985&pid=null&lpos=ABTop_1_spev8_24808980_subindex&");
+metaMan.pane.scrape("/widgets/spev8/meta?id=26608167&pid=null&lpos=ABTop_1_spev8_24808980_subindex&");
+metaPlaylist.gotoItem("spev8-26608167");
+// ]]>
+</script>
+<script type="text/javascript">
+addOnload(function(){loadScript('widgets/spev8/batchLoad?id=24809163&pid=null&lpos=ABTop_1_spev8_24808980_subindex')});
+//used for show/hide config in sfplayer.js
+window.spev8Overlay = document.getElementById('videoAdOverlay');
+window.spev8ImageContainer = document.getElementById('s8-image-container');
+</script>
+<!--widget[ABTop_2_freeformlite_24808980_subindex]-->
+<div id="ff_lite" class="v2w ffl_two_col">
+<div class="midcontainer">
+<div class="ffl_wrapper"><div class="ffl_row">
+<div id="th_26569596" class="ffl_obj ffl_0 even">
+<div class="th">
+<div class="th_image">
+<a href="/Health/talks-ebola-nurse-kaci-hickox-fail-governor-full/story?id=26569596" name="lpos=widget[ABTop_2_freeformlite_24808980_subindex]&lid=link[Thumb_1]"><img src="http://a.abcnews.com/images/Health/AP_ebola_nurse_mar_141030_16x9t_240.jpg" border="0" width="150" height="84" alt="PHOTO: Nurse Kaci Hickox, right, and her boyfriend, Ted Wilbur are followed by a Maine State Trooper as they ride bikes on a trail near her home in Fort Kent, Maine, Oct. 30, 2014. " /></a>
+</div>
+<div class="th_headline">
+<a href="/Health/talks-ebola-nurse-kaci-hickox-fail-governor-full/story?id=26569596" name="lpos=widget[ABTop_2_freeformlite_24808980_subindex]&lid=link[Headline_1]">Talks With Ebola Nurse Fail, Gov to Use 'Full Authority'</a>
+</div>
+<div class="clearleft"><!--empty--></div>
+</div>
+</div>
+<div id="th_26574508" class="ffl_obj ffl_1 odd">
+<div class="th">
+<div class="th_image">
+<a href="/Health/maine-pizzeria-awaits-nod-police-deliver-pizza-ebola/story?id=26574508" name="lpos=widget[ABTop_2_freeformlite_24808980_subindex]&lid=link[Thumb_2]"><img src="http://a.abcnews.com/images/Health/ht_mooseshack_pizza_kb_141030_16x9t_240.jpg" border="0" width="150" height="84" alt="PHOTO: The Mooseshack restaurant in Fort Kent, Maine is seen in this undated grab from Google Maps. " /></a>
+</div>
+<div class="th_headline">
+<a href="/Health/maine-pizzeria-awaits-nod-police-deliver-pizza-ebola/story?id=26574508" name="lpos=widget[ABTop_2_freeformlite_24808980_subindex]&lid=link[Headline_2]">Maine Pizzeria Delivers Pie to Ebola Nurse</a>
+</div>
+<div class="clearleft"><!--empty--></div>
+</div>
+</div>
+<div class="clearboth"><!--empty--></div></div><div class="ffl_row">
+<div id="th_26542668" class="ffl_obj ffl_2 even">
+<div class="th">
+<div class="th_image">
+<a href="/Health/ebola-america-nurse-maine-health-officials-violate-civil/story?id=26542668" name="lpos=widget[ABTop_2_freeformlite_24808980_subindex]&lid=link[Thumb_3]"><img src="http://a.abcnews.com/images/Health/HT_Ebola_Fort_Kent_Newser_bc_102914_16x9t_240.jpg" border="0" width="150" height="84" alt="Kaci Hickox (left) and Ted Wilbur address the media during a informal press meeting on Wednesday outside their home in Fort Kent, Maine, on Wednesday, October 29, 2014" /></a>
+</div>
+<div class="th_headline">
+<a href="/Health/ebola-america-nurse-maine-health-officials-violate-civil/story?id=26542668" name="lpos=widget[ABTop_2_freeformlite_24808980_subindex]&lid=link[Headline_3]">Ebola Nurse to Officials: Don't Violate 'My Civil Rights' </a>
+</div>
+<div class="clearleft"><!--empty--></div>
+</div>
+</div>
+<div id="th_26547704" class="ffl_obj ffl_3 odd">
+<div class="th">
+<div class="th_image">
+<a href="/Politics/obama-hugs-kisses-ease-ebola-fears/story?id=26547704" name="lpos=widget[ABTop_2_freeformlite_24808980_subindex]&lid=link[Thumb_4]"><img src="http://a.abcnews.com/images/Health/AP_obama_pham_kab_141024_16x9t_240.jpg" border="0" width="150" height="84" alt="PHOTO: President Barack Obama hugs Ebola survivor Nina Pham in the Oval Office of the White House in Washington, D.C. on Oct. 24, 2014. " /></a>
+</div>
+<div class="th_headline">
+<a href="/Politics/obama-hugs-kisses-ease-ebola-fears/story?id=26547704" name="lpos=widget[ABTop_2_freeformlite_24808980_subindex]&lid=link[Headline_4]">Obama Uses Hugs And Kisses to Ease Ebola Fears</a>
+</div>
+<div class="clearleft"><!--empty--></div>
+</div>
+</div>
+<div class="clearboth"><!--empty--></div></div><div class="ffl_row">
+<div id="th_26535878" class="ffl_obj ffl_4 even">
+<div class="th">
+<div class="th_image">
+<a href="/US/nurse-kaci-hickox-court-maine-ebola-quarantine-rule/story?id=26535878" name="lpos=widget[ABTop_2_freeformlite_24808980_subindex]&lid=link[Thumb_5]"><img src="http://a.abcnews.com/images/Health/ABC_Kaci_Hickox_ml_141029_16x9t_240.jpg" border="0" width="150" height="84" alt="PHOTO: Kaci Hickox is seen in a Skype interview from her home in Fort Kent, Maine, Oct. 29, 2014." /></a>
+</div>
+<div class="th_headline">
+<a href="/US/nurse-kaci-hickox-court-maine-ebola-quarantine-rule/story?id=26535878" name="lpos=widget[ABTop_2_freeformlite_24808980_subindex]&lid=link[Headline_5]">Nurse 'Will Go to Court' Over Maine Ebola Quarantine Rule </a>
+</div>
+<div class="clearleft"><!--empty--></div>
+</div>
+</div>
+<div id="th_26495682" class="ffl_obj ffl_5 odd">
+<div class="th">
+<div class="th_image">
+<a href="/Health/dallas-nurse-discharged-ebola-treatment/story?id=26495682" name="lpos=widget[ABTop_2_freeformlite_24808980_subindex]&lid=link[Thumb_6]"><img src="http://a.abcnews.com/images/US/abc_amber_vinson_ebola_wy_141028_16x9t_240.jpg" border="0" width="150" height="84" alt="PHOTO: Dallas nurse Amber Vinson speaks at a press conference after recovering from Ebola, Oct. 28, 2014. " /></a>
+</div>
+<div class="th_headline">
+<a href="/Health/dallas-nurse-discharged-ebola-treatment/story?id=26495682" name="lpos=widget[ABTop_2_freeformlite_24808980_subindex]&lid=link[Headline_6]">2nd Dallas Nurse Ebola-Free, Released From Hospital </a>
+</div>
+<div class="clearleft"><!--empty--></div>
+</div>
+</div>
+<div class="clearboth"><!--empty--></div></div><div class="ffl_row">
+<div id="th_26486775" class="ffl_obj ffl_6 even">
+<div class="th">
+<div class="th_image">
+<a href="/Health/us-army-quarantine-troops-fighting-ebola/story?id=26486775" name="lpos=widget[ABTop_2_freeformlite_24808980_subindex]&lid=link[Thumb_7]"><img src="http://a.abcnews.com/images/Health/AP_liberia_ebola_jef_141027_16x9t_240.jpg" border="0" width="150" height="84" alt="PHOTO: A member of the U.S army walks past a newly constructed Ebola treatment centre in Bongcounty, on the outskirts of Monrovia, Liberia, Oct. 7, 2014. " /></a>
+</div>
+<div class="th_headline">
+<a href="/Health/us-army-quarantine-troops-fighting-ebola/story?id=26486775" name="lpos=widget[ABTop_2_freeformlite_24808980_subindex]&lid=link[Headline_7]">Army to Quarantine Troops Who Were Fighting Ebola</a>
+</div>
+<div class="clearleft"><!--empty--></div>
+</div>
+</div>
+<div id="th_26479917" class="ffl_obj ffl_7 odd">
+<div class="th">
+<div class="th_image">
+<a href="/Health/ebola-nurse-kaci-hickox-understand-quarantine-jersey-governor/story?id=26479917" name="lpos=widget[ABTop_2_freeformlite_24808980_subindex]&lid=link[Thumb_8]"><img src="http://a.abcnews.com/images/Health/AP_kaci_hickox_kab_141027_16x9t_240.jpg" border="0" width="150" height="84" alt="PHOTO: Kaci Hickox is pictured in this undated image provided by the University of Texas at Arlington. " /></a>
+</div>
+<div class="th_headline">
+<a href="/Health/ebola-nurse-kaci-hickox-understand-quarantine-jersey-governor/story?id=26479917" name="lpos=widget[ABTop_2_freeformlite_24808980_subindex]&lid=link[Headline_8]">Ebola Nurse Will 'Understand' Her Quarantine, Gov Says </a>
+</div>
+<div class="clearleft"><!--empty--></div>
+</div>
+</div>
+<div class="clearboth"><!--empty--></div></div><div class="ffl_row">
+<div id="th_26478362" class="ffl_obj ffl_8 even">
+<div class="th">
+<div class="th_image">
+<a href="/Health/year-boy-tests-negative-ebola-nyc-hospital/story?id=26478362" name="lpos=widget[ABTop_2_freeformlite_24808980_subindex]&lid=link[Thumb_9]"><img src="http://a.abcnews.com/images/Politics/AP_ebola_nyc_bellevue_2_jt_141024_16x9t_240.jpg" border="0" width="150" height="84" alt="PHOTO: Cars pass Manhattans Bellevue Hospital, Oct. 23, 2014, in New York." /></a>
+</div>
+<div class="th_headline">
+<a href="/Health/year-boy-tests-negative-ebola-nyc-hospital/story?id=26478362" name="lpos=widget[ABTop_2_freeformlite_24808980_subindex]&lid=link[Headline_9]">5-Year-Old Boy Tests Negative for Ebola at NYC Hospital</a>
+</div>
+<div class="clearleft"><!--empty--></div>
+</div>
+</div>
+<div id="th_26466975" class="ffl_obj ffl_9 odd">
+<div class="th">
+<div class="th_image">
+<a href="/Health/nurse-ebola-quarantine-sue-freedom-feds-push-back/story?id=26466975" name="lpos=widget[ABTop_2_freeformlite_24808980_subindex]&lid=link[Thumb_10]"><img src="http://a.abcnews.com/images/Health/HT_HICKOX_TENT_141027_DG_16x9t_240.jpg" border="0" width="150" height="84" alt="Kaci Hickox is seen sitting inside the isolation tent she has been housed in at University Hospital in Newark, New Jersey." /></a>
+</div>
+<div class="th_headline">
+<a href="/Health/nurse-ebola-quarantine-sue-freedom-feds-push-back/story?id=26466975" name="lpos=widget[ABTop_2_freeformlite_24808980_subindex]&lid=link[Headline_10]">Nurse in Ebola Quarantine Fights for Freedom</a>
+</div>
+<div class="clearleft"><!--empty--></div>
+</div>
+</div>
+<div class="clearboth"><!--empty--></div></div><div class="ffl_row">
+<div id="th_26469964" class="ffl_obj ffl_10 even">
+<div class="th">
+<div class="th_image">
+<a href="/Health/nyc-ebola-patient-plasma-treatment/story?id=26469964" name="lpos=widget[ABTop_2_freeformlite_24808980_subindex]&lid=link[Thumb_11]"><img src="http://a.abcnews.com/images/US/ht_bellevue_spencer_ebola_FLOAT_kb_141023_16x9t_240.jpg" border="0" width="150" height="84" alt="PHOTO: This photo posted to Instagram on Oct. 23, 2014 shows workers in protective gear in Harlem, New York, where Dr. Craig Spencer, seen inset in this undated LinkedIn photo, was taken from his apartment to Bellevue Hospital. " /></a>
+</div>
+<div class="th_headline">
+<a href="/Health/nyc-ebola-patient-plasma-treatment/story?id=26469964" name="lpos=widget[ABTop_2_freeformlite_24808980_subindex]&lid=link[Headline_11]">NYC Ebola Patient 'Looks Better' After Plasma Treatment</a>
+</div>
+<div class="clearleft"><!--empty--></div>
+</div>
+</div>
+<div id="th_26465651" class="ffl_obj ffl_11 odd last">
+<div class="th">
+<div class="th_image">
+<a href="/Health/infectious-disease-specialist-dr-anthony-fauci-rejects-mandatory/story?id=26465651" name="lpos=widget[ABTop_2_freeformlite_24808980_subindex]&lid=link[Thumb_12]"><img src="http://a.abcnews.com/images/Politics/ABC_anthony_fauci_jt_141026_16x9t_240.jpg" border="0" width="150" height="84" alt="PHOTO: National Institute of Allergy and Infectious Diseases Director Dr Anthony Fauci on This Week" /></a>
+</div>
+<div class="th_headline">
+<a href="/Health/infectious-disease-specialist-dr-anthony-fauci-rejects-mandatory/story?id=26465651" name="lpos=widget[ABTop_2_freeformlite_24808980_subindex]&lid=link[Headline_12]">Infectious Disease Specialist Rejects Mandatory Ebola Quarantine</a>
+</div>
+<div class="clearleft"><!--empty--></div>
+</div>
+</div>
+<div class="clearboth"><!--empty--></div></div><div class="clearboth"><!--empty--></div></div>
+</div>
+</div>
+<div class="clearboth"><!-- empty --></div>
+</div>
+<div class="ab_ind">
+<div class="a_col" id="a_col_default">
+</div>
+<div class="b_col">
+</div>
+<div class="clearboth"><!--empty--></div>
+</div>
+<div class="ab_col">
+<div class="clearboth"><!--empty--></div>
+</div>
+</div>
+<!-- end ab container -->
+<div class="c_cont">
+<div class="c_col">
+<!--widget[C_1_freeformlite_24808980_subindex]-->
+<div id="ff_lite" class="v2w ffl_one_col">
+<div class="midcontainer">
+<div class="widget_head_1" id="wh_one">
+<div class="title">
+Video
+</div>
+</div>
+<div class="ffl_wrapper">
+<div id="th_26608582" class="ffl_obj ffl_0 even">
+<div class="th">
+<div class="th_image">
+<a href="/GMA/video/kaci-hickox-reacts-to-court-decision-26608582" name="lpos=widget[C_1_freeformlite_24808980_subindex]&lid=link[Thumb_1]"><img src="http://a.abcnews.com/images/GMA/ABC_HICKOX_PRESSER_141031_16x9t_240.jpg" border="0" width="150" height="84" alt="VIDEO: The nurse who treated Ebola patients in West Africa spoke to the press soon after a judge ruled that she can leave her home." /><span class="image_icon"><!-- bg --></span></a>
+</div>
+<div class="th_headline">
+<a href="/GMA/video/kaci-hickox-reacts-to-court-decision-26608582" name="lpos=widget[C_1_freeformlite_24808980_subindex]&lid=link[Headline_1]">Kaci Hickox 'Humbled' by Court's Decision</a>
+</div>
+<div class="clearleft"><!--empty--></div>
+</div>
+</div>
+<div id="th_26602547" class="ffl_obj ffl_1 odd">
+<div class="th">
+<div class="th_image">
+<a href="/Health/video/properly-put-hazmat-suit-26602547" name="lpos=widget[C_1_freeformlite_24808980_subindex]&lid=link[Thumb_2]"><img src="http://a.abcnews.com/images/Health/141031_abc_hazmat3_16x9t_240.jpg" border="0" width="150" height="84" alt="VIDEO: How to Properly Put on a Hazmat Suit" /><span class="image_icon"><!-- bg --></span></a>
+</div>
+<div class="th_headline">
+<a href="/Health/video/properly-put-hazmat-suit-26602547" name="lpos=widget[C_1_freeformlite_24808980_subindex]&lid=link[Headline_2]">How to Properly Put on a Hazmat Suit </a>
+</div>
+<div class="clearleft"><!--empty--></div>
+</div>
+</div>
+<div id="th_26597628" class="ffl_obj ffl_2 even">
+<div class="th">
+<div class="th_image">
+<a href="/GMA/video/ebola-nurse-maine-governor-asks-kaci-hickox-prove-26597628" name="lpos=widget[C_1_freeformlite_24808980_subindex]&lid=link[Thumb_3]"><img src="http://a.abcnews.com/images/GMA/141031_gma_janis1_0707_16x9t_240.jpg" border="0" width="150" height="84" alt="VIDEO: Maine Governor Asks Kaci Hickox to Prove Shes Ebola Free" /><span class="image_icon"><!-- bg --></span></a>
+</div>
+<div class="th_headline">
+<a href="/GMA/video/ebola-nurse-maine-governor-asks-kaci-hickox-prove-26597628" name="lpos=widget[C_1_freeformlite_24808980_subindex]&lid=link[Headline_3]">Maine Governor Asks Kaci Hickox to Prove She's Ebola-Free</a>
+</div>
+<div class="clearleft"><!--empty--></div>
+</div>
+</div>
+<div id="th_26588511" class="ffl_obj ffl_3 odd">
+<div class="th">
+<div class="th_image">
+<a href="/WNT/video/kaci-hickox-state-maine-deadlock-26588511" name="lpos=widget[C_1_freeformlite_24808980_subindex]&lid=link[Thumb_4]"><img src="http://a.abcnews.com/images/WNT/141030_wn_janis1_22x15t_240.jpg" border="0" width="150" height="84" alt="VIDEO: Kaci Hickox and the State of Maine in a Deadlock" /><span class="image_icon"><!-- bg --></span></a>
+</div>
+<div class="th_headline">
+<a href="/WNT/video/kaci-hickox-state-maine-deadlock-26588511" name="lpos=widget[C_1_freeformlite_24808980_subindex]&lid=link[Headline_4]">Kaci Hickox and the State of Maine in a Deadlock</a>
+</div>
+<div class="clearleft"><!--empty--></div>
+</div>
+</div>
+<div id="th_26579685" class="ffl_obj ffl_4 even">
+<div class="th">
+<div class="th_image">
+<a href="/GMA/video/maine-governor-to-use-full-authority-against-ebola-nurse-26579685" name="lpos=widget[C_1_freeformlite_24808980_subindex]&lid=link[Thumb_5]"><img src="http://a.abcnews.com/images/GMA/nwo_ebola_pkg_141035_16x9t_240.jpg" border="0" width="150" height="84" alt="VIDEO: Gov. Paul LePage plans action after Kaci Hickox defies requests to remain quarantined." /><span class="image_icon"><!-- bg --></span></a>
+</div>
+<div class="th_headline">
+<a href="/GMA/video/maine-governor-to-use-full-authority-against-ebola-nurse-26579685" name="lpos=widget[C_1_freeformlite_24808980_subindex]&lid=link[Headline_5]">Maine Governor to Use 'Full Authority' Against Ebola Nurse</a>
+</div>
+<div class="clearleft"><!--empty--></div>
+</div>
+</div>
+<div id="th_26575705" class="ffl_obj ffl_5 odd">
+<div class="th">
+<div class="th_image">
+<a href="/Health/video/nurse-breaks-ebola-quarantine-26575705" name="lpos=widget[C_1_freeformlite_24808980_subindex]&lid=link[Thumb_6]"><img src="http://a.abcnews.com/images/Health/141030_dvo_spec_hickox3_16x9t_240.jpg" border="0" width="150" height="84" alt="VIDEO: Nurse Breaks Ebola Quarantine " /><span class="image_icon"><!-- bg --></span></a>
+</div>
+<div class="th_headline">
+<a href="/Health/video/nurse-breaks-ebola-quarantine-26575705" name="lpos=widget[C_1_freeformlite_24808980_subindex]&lid=link[Headline_6]">Nurse Breaks Ebola Quarantine </a>
+</div>
+<div class="clearleft"><!--empty--></div>
+</div>
+</div>
+<div id="th_26566906" class="ffl_obj ffl_6 even">
+<div class="th">
+<div class="th_image">
+<a href="/GMA/video/nurse-hickox-defies-ebola-quarantine-leaves-home-26566906" name="lpos=widget[C_1_freeformlite_24808980_subindex]&lid=link[Thumb_7]"><img src="http://a.abcnews.com/images/GMA/141030_gma_janis_16x9t_240.jpg" border="0" width="150" height="84" alt="VIDEO: Nurse Hickox Defies Ebola Quarantine, Leaves Home" /><span class="image_icon"><!-- bg --></span></a>
+</div>
+<div class="th_headline">
+<a href="/GMA/video/nurse-hickox-defies-ebola-quarantine-leaves-home-26566906" name="lpos=widget[C_1_freeformlite_24808980_subindex]&lid=link[Headline_7]">Nurse Kaci Hickox Defies Ebola Quarantine, Leaves Home</a>
+</div>
+<div class="clearleft"><!--empty--></div>
+</div>
+</div>
+<div id="th_26558411" class="ffl_obj ffl_7 odd">
+<div class="th">
+<div class="th_image">
+<a href="/WNT/video/president-obama-asks-dignity-respect-ebola-healthcare-workers-26558411" name="lpos=widget[C_1_freeformlite_24808980_subindex]&lid=link[Thumb_8]"><img src="http://a.abcnews.com/images/WNT/141029__wn_janis0_16x9t_240.jpg" border="0" width="150" height="84" alt="VIDEO: President Obama Asks &quot;Dignity and Respect&quot; For Ebola Healthcare Workers " /><span class="image_icon"><!-- bg --></span></a>
+</div>
+<div class="th_headline">
+<a href="/WNT/video/president-obama-asks-dignity-respect-ebola-healthcare-workers-26558411" name="lpos=widget[C_1_freeformlite_24808980_subindex]&lid=link[Headline_8]">President Obama Asks "Dignity and Respect" For Ebola Healthcare Workers </a>
+</div>
+<div class="clearleft"><!--empty--></div>
+</div>
+</div>
+<div id="th_26536026" class="ffl_obj ffl_8 even">
+<div class="th">
+<div class="th_image">
+<a href="/GMA/video/nurse-kaci-hickoxs-firsthand-account-mandatory-ebola-quarantines-26536026" name="lpos=widget[C_1_freeformlite_24808980_subindex]&lid=link[Thumb_9]"><img src="http://a.abcnews.com/images/GMA/141029_gma_ebola_0707_16x9t_240.jpg" border="0" width="150" height="84" alt="VIDEO: Nurse Kaci Hickox Takes Up Fight Against Mandatory Ebola Quarantines" /><span class="image_icon"><!-- bg --></span></a>
+</div>
+<div class="th_headline">
+<a href="/GMA/video/nurse-kaci-hickoxs-firsthand-account-mandatory-ebola-quarantines-26536026" name="lpos=widget[C_1_freeformlite_24808980_subindex]&lid=link[Headline_9]">Quarantined Ebola Nurse Kaci Hickox 'Will Go to Court'</a>
+</div>
+<div class="clearleft"><!--empty--></div>
+</div>
+</div>
+<div id="th_26514077" class="ffl_obj ffl_9 odd last">
+<div class="th">
+<div class="th_image">
+<a href="/GMA/video/ebola-survivor-amber-vinson-credits-gods-love-26514077" name="lpos=widget[C_1_freeformlite_24808980_subindex]&lid=link[Thumb_10]"><img src="http://a.abcnews.com/images/GMA/abc_vinson_final_141028_16x9t_240.jpg" border="0" width="150" height="84" alt="VIDEO: The Texas nurse was discharged from Emory University after being declared free of the virus." /><span class="image_icon"><!-- bg --></span></a>
+</div>
+<div class="th_headline">
+<a href="/GMA/video/ebola-survivor-amber-vinson-credits-gods-love-26514077" name="lpos=widget[C_1_freeformlite_24808980_subindex]&lid=link[Headline_10]">Ebola Survivor Amber Vinson Credits 'God's Love'</a>
+</div>
+<div class="clearleft"><!--empty--></div>
+</div>
+</div>
+<div class="clearboth"><!--empty--></div></div>
+</div>
+</div>
+<!--widget[C_2_ad_24808980_subindex]-->
+<div id="homead">
+<div class="container">
+<div class="label">&nbsp;</div>
+<div class="ad">
+<div class="ad_container"><script type="text/javascript">digGetAd("Rectangle");</script></div>
+</div>
+</div>
+</div>
+</div>
+<div class="clearboth"><!-- empty --></div>
+</div>
+<div class="clearboth"><!-- empty --></div>
+</div> <!-- end abc mid -->
+<div id="indexV2-r3" class="abc_wide">
+<div class="clearboth"><!-- empty --></div>
+</div>
+<div class="marketplace"><script type='text/javascript'>slGetAd('footer',false);</script>
+<div class="marketplacepromos">
+<div class="midcontainer">
+<div class="promoright">
+<div class="promobox">
+<div class="ad_container"><script type="text/javascript">digGetAd("PromoBox");</script></div>
+</div>
+<div class="promoboxBottom">
+<div class="ad_container"><script type="text/javascript">digGetAd("PromoBox2");</script></div>
+</div>
+</div>
+</div>
+</div><div class="clearboth"><!-- empty --></div></div>
+<div class="clearboth"><!-- empty --></div>
+</div>
+</div>
+</div>
+<style>
+#_fs_container{height:100px;}
+</style>
+<div class="footercontainer" id="_fs_container">
+<div class="footer_bg"><!-- bg --></div>
+<div class="footer_small">
+<div class="_networks"><a href="/" name="lpos=nav[footer_subindex]&lid=section[Logo]">Yahoo!-ABC News Network</a></div>
+<a href="https://twitter.com/abc" class="_socialF" target="_blank" name="lpos=nav[footer_subindex]&lid=section[Tools_Twitter]"><div class="_tw"></div></a>
+<a href="https://www.facebook.com/abcnews" class="_socialF" target="_blank" name="lpos=nav[footer_subindex]&lid=section[Tools_Facebook]"><div class="_fb"></div></a>
+<a href="https://plus.google.com/+ABCNews" class="_socialF" target="_blank" name="lpos=nav[footer_subindex]&lid=section[Tools_Google Plus]"><div class="_gp"></div></a>
+<a class="_links" href="http://disneyprivacycenter.com" target="_blank" name="lpos=nav[footer_subindex]&lid=section[About_Privacy Policy]">Privacy Policy</a>
+<a class="_links" href="https://disneyprivacycenter.com/notice-to-california-residents/" target="_blank" name="lpos=nav[footer_subindex]&lid=section[About_California Privacy Rights]">Your CA Privacy Rights</a>
+<a class="_links" href="https://disneyprivacycenter.com/kids-privacy-policy/english/" target="_blank" name="lpos=nav[footer_subindex]&lid=section[About_COPPA]">Children's Online Privacy Policy</a>
+<a class="_links" href="http://preferences-mgr.truste.com/?type=abcnews&affiliateId=11" target="_blank" name="lpos=nav[subindex]&lid=section[About_Interest-Based Ads]">Interest-Based Ads</a>
+<a class="_links" href="http://disneytermsofuse.com" target="_blank" name="lpos=nav[subindex]&lid=section[About_Terms of Use]">Terms of Use</a>
+<a class="_links" style="margin-right:0;" href="http://abcnews.go.com/Site/page?id=3068843" target="_blank" name="lpos=nav[subindex]&lid=section[About_Contact Us]">Contact Us</a>
+<div class="_rights" style="width:100%;margin-top:10px;margin-bottom:10px;text-align:center;">&copy; 2015 ABC News Internet Ventures. All rights reserved.</div>
+<div class="clearboth"></div>
+</div>
+</div>
+<script type="text/javascript">
+var _sf_async_config={};
+/** CONFIGURATION START **/
+_sf_async_config.uid =12240 ;//28332
+_sf_async_config.domain = location.hostname;
+_sf_async_config.useCanonical = 'true';
+if (typeof tq != 'undefined' && tq.section) {
+_sf_async_config.sections = tq.section;
+} else if (typeof abcnewsSite != 'undefined' && abcnewsSite.section) {
+_sf_async_config.sections = abcnewsSite.section;
+} else {
+_sf_async_config.sections = '';
+}
+if (typeof tq != 'undefined' && tq.byline) {
+_sf_async_config.authors = tq.byline;
+} else {
+_sf_async_config.authors = '';
+}
+/** CONFIGURATION END **/
+(function(){
+function loadChartbeat() { window._sf_endpt=(new Date()).getTime(); var e = document.createElement('script'); e.setAttribute('language', 'javascript'); e.setAttribute('type', 'text/javascript'); e.setAttribute('src', (('https:' == document.location.protocol) ? 'https://a248.e.akamai.net/chartbeat.download.akamai.com/102508/' : 'http://static.chartbeat.com/') + 'js/chartbeat.js'); document.body.appendChild(e); }
+addOnload(loadChartbeat);
+})();
+</script>
+<!-- Start Quantcast tag -->
+<script type="text/javascript">
+_qoptions={
+qacct:"p-9e_QHc34iBt22",
+labels:"ABC News.Health"
+};
+</script>
+<script type="text/javascript" src="http://edge.quantserve.com/quant.js"></script>
+<noscript>
+<img src="http://pixel.quantserve.com/pixel/p-9e_QHc34iBt22.gif?labels=<%replace(label,' ', '%20')%>" style="display: none;" border="0" height="1" width="1" alt="Quantcast"/>
+</noscript>
+<!-- End Quantcast tag -->
+<!-- Nielsen Online SiteCensus V6.0, Copyright 2010 Nielsen Online-->
+<script type="text/javascript">
+(function () {
+var nielsenImg = new Image(1, 1);
+nielsenImg.onerror = nielsenImg.onload = function () {
+nielsenImg.onerror = nielsenImg.onload = null;
+};
+nielsenImg.src = ["//secure-us.imrworldwide.com/cgi-bin/m?ci=us-704476h&cg=0&cc=1&si=", escape(window.location.href), "&rp=", escape(document.referrer), "&ts=compact&rnd=", (new Date()).getTime()].join('');
+})();
+</script>
+<noscript><div><img src="//secure-us.imrworldwide.com/cgi-bin/m?ci=us-704476h&cg=0&cc=1&ts=noscript" width="1" height="1" alt="" /></div></noscript>
+<!-- Google Code for ABC News - Site - 365 Remarketing List -->
+<script type="text/javascript">
+var google_conversion_id = 1005826543;
+var google_conversion_language = "en";
+var google_conversion_format = "3";
+var google_conversion_color = "ffffff";
+var google_conversion_label = "1GPKCOHYjwMQ7-PO3wM";
+var google_conversion_value = 0;
+</script>
+<script type="text/javascript" src="http://www.googleadservices.com/pagead/conversion.js" async></script>
+<noscript><div style="display:inline;"><img height="1" width="1" style="border-style:none;" alt="" src="http://www.googleadservices.com/pagead/conversion/1005826543/?value=0&amp;label=1GPKCOHYjwMQ7-PO3wM&amp;guid=ON&amp;script=0"/></div></noscript>
+<div class="ad_container"><script type="text/javascript">digGetAd("PopUnder");</script></div><div class="ad_container"><script type="text/javascript">digGetAd("Survey");</script></div><div class="ad_container"><script type="text/javascript">digGetAd("OverPage");</script></div><div class="ad_container"><script type="text/javascript">digGetAd("Footer");</script></div>
+<div class="ad_container"><script type="text/javascript">digGetAd("RevenueScience");</script></div>
+<!-- SiteCatalyst code version: H.15.1 Copyright 1997-2007 Omniture, Inc. More info available at http://www.omniture.com -->
+<script language="JavaScript">
+var s_account = "wdgnewabcnews,wdgasec";
+</script>
+<script language="JavaScript" src="http://a.abcnews.com/assets/js/s_code.js?v=3"></script>
+<script language="JavaScript">
+// Optimizely SiteCatalyst Integration
+window.optimizely = window.optimizely || [];
+window.optimizely.push(['activateSiteCatalyst', {"sVariable": s_omni}]);
+s_omni.pageName = "abcn:s1_health:s2_ebola:24808980:ebola subindex:subindex"; //content name
+s_omni.pageURL = ""; //content url
+s_omni.pageType = ""; //page type
+s_omni.server = window.document.location.hostname; //reporting domain
+s_omni.prop4 = "subindex"; //content type
+s_omni.prop1 = "abcn"; //site name
+s_omni.channel = "abcn:health";
+s_omni.prop5 = "abcn:health:ebola"; //level2
+s_omni.prop6 = ""; // level 3 content category
+s_omni.prop13 = ""; //columnist
+s_omni.prop16 = ""; //source
+s_omni.prop18 = "24808980:ebola subindex"; //content id:content name
+s_omni.prop24 = ""; //top story
+s_omni.prop25 = ""; //top video
+s_omni.prop26 = ""; //top slideshow
+s_omni.hier1 = "abcn:health:ebola";//directory structure
+s_omni.eVar16 = s_omni.pageName; //content name conversion
+s_omni.eVar17 = s_omni.prop4+":"+s_omni.channel;
+var s_code=s_omni.t();if(s_code)document.write(s_code);
+</script>
+<!-- End SiteCatalyst code version: H.15.1 -->
+</body>
+</html>
