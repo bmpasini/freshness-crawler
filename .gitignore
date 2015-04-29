@@ -1,2 +1,2 @@
-fetcher/output/*
-extractor/output/*
+tmp/*
+output/*
