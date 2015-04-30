@@ -6,9 +6,9 @@ import csv
 
 class Fetcher(object):
 
-  def __init__(self, url_file):
-    self.cnt = 0
+  def __init__(self, url_file, run_number):
     self.url_file = url_file
+    self.run_number = run_number
 
   def get_urls_ary(self):
     tmp = open(self.url_file, "r")
@@ -60,8 +60,10 @@ class Fetcher(object):
 
   def save_html(self, url, html):
     self.create_diretory("tmp")
+    tmp_dir = "tmp/run_" + str(self.run_number)
+    self.create_diretory(tmp_dir)
     domain = self.parse_domain(url)
-    path = "tmp/" + domain
+    path = tmp_dir + "/" + domain
     self.create_diretory(path)
     file_path = path + "/" + urllib.quote(url, '')
     tmp = open(file_path, 'a')
@@ -75,18 +77,16 @@ class Fetcher(object):
         htmls[url] = response.read()
         print len(htmls), ":", url
         self.save_html(url, htmls[url])
-        self.cnt += 1
       except IOError:
         pass
 
   def fetch_and_save_all(self, urls):
+    print "Starting fetch number", str(self.run_number)
     htmls = {}
     while urls != {}:
       next_fetch_urls = self.next_fetch(urls)
       self.fetch_urls_and_save(htmls, next_fetch_urls)
-    print "Fetched", self.cnt, "urls."
-    # return htmls
-    return True
+    print "Fetched", len(htmls), "urls."
 
   def run(self):
     urls = self.get_urls() # {domain : [url1, url2, .., urln]}
@@ -96,8 +96,10 @@ class Fetcher(object):
 
 class Extractor(object):
   
-  def __init__(self, dirname):
+  def __init__(self, dirname, run_number):
     self.dirname = dirname
+    self.run_number = run_number
+    self.links = []
 
   def get_all_files(self):
     print "Loading all filenames"
@@ -106,20 +108,21 @@ class Extractor(object):
       for filename in filenames:
         files.append(path + "/" + filename)
     files.pop(0)
-    print "Done loading filenames", len(files)
+    print "Done loading", len(files), "filenames"
     return files
 
   def extract_links(self, html):
-    links = []
     soup = BeautifulSoup(html)
     for tag in soup.find_all('a'):
-      link = tag.get('href', None)
-      link = str(link)
-      if "http://" in link:
-        links.append(link)
-      elif "https://" in link:
-        links.append(link)
-    return links
+      try:
+        link = tag.get('href', None)
+        link = str(link)
+        if "http://" in link:
+          self.links.append(link)
+        elif "https://" in link:
+          self.links.append(link)
+      except UnicodeEncodeError:
+        pass
 
   def get_edges_from_file(self, f):
     edges = []
@@ -127,16 +130,18 @@ class Extractor(object):
     html = " ".join(tmp.readlines())
     tmp.close
     origin = urllib.unquote(os.path.basename(os.path.normpath(f)))
-    links = self.extract_links(html)
-    for link in links:
+    self.extract_links(html)
+    for link in self.links:
       edges.append([origin, link])
     return edges
 
   def get_edges_from_files(self, files):
     edges = []
+    print "Starting extraction number", str(self.run_number)
     for f in files:
-      print "Loading links from", urllib.unquote(os.path.basename(os.path.normpath(f)))
+      print "Extracting links from", urllib.unquote(os.path.basename(os.path.normpath(f)))
       edges += self.get_edges_from_file(f)
+    print "Done extracting", len(self.links), "links."
     return edges
 
   def remove_file(self, path):
@@ -147,54 +152,73 @@ class Extractor(object):
     if not os.path.exists(path):
       os.makedirs(path)
 
-  def save_edges(self, edges):
-    self.create_diretory("output")
-    # outlinks
+  def save_outlinks(self, edges):
     edges = [["url", "outlink"]] + edges
-    self.remove_file("output/outlinks.csv")
-    with open('output/outlinks.csv', 'wb') as fp:
-      a = csv.writer(fp, delimiter=',')
+    outlink_file = "output/run_" + str(self.run_number) + "/outlinks.csv"
+    self.remove_file(outlink_file)
+    with open(outlink_file, 'wb') as fp:
+      a = csv.writer(fp, delimiter=',', quotechar='"')
       for edge in edges:
         a.writerow(edge)
-    # backlinks
+
+  def save_backlinks(self, edges):
     edges[0] = ["url", "backlink"]
-    self.remove_file("output/backlinks.csv")
-    with open('output/backlinks.csv', 'wb') as fp:
-      a = csv.writer(fp, delimiter=',')
+    backlink_file = "output/run_" + str(self.run_number) + "/backlinks.csv"
+    self.remove_file(backlink_file)
+    with open(backlink_file, 'wb') as fp:
+      a = csv.writer(fp, delimiter=',', quotechar='"')
       for edge in edges:
         inverted = [edge[1],edge[0]]
         a.writerow(inverted)
+
+  def save_edges(self, edges):
+    self.create_diretory("output")
+    self.create_diretory("output/run_" + str(self.run_number))
+    self.save_outlinks(edges)
+    self.save_backlinks(edges)
 
   def run(self):
     files = self.get_all_files()
     edges = self.get_edges_from_files(files)
     self.save_edges(edges)
+    return self.links
 
 class Crawler(object):
 
-  def __init__(self, url_file):
+  def __init__(self, url_file, num_of_runs):
     self.url_file = url_file
+    self.run_number = 1
+    self.num_of_runs = num_of_runs
+
+  def remove_file(self, path):
+    if os.path.exists(path):
+      os.remove(path)
+
+  def save_links(self, links):
+    file_name = "output/run_" + str(self.run_number) + "/urls.txt" 
+    self.remove_file(file_name)
+    with open(file_name, "a+") as fp:
+      for link in set(links):
+        fp.write(link + "\n")
+
+  def single_run(self):
+    if self.run_number != 1:
+      self.url_file = "output/run_" + str(self.run_number - 1) + "/urls.txt" 
+    fetcher = Fetcher(self.url_file, self.run_number)
+    fetcher.run()
+    tmp_dir = "tmp/run_" + str(self.run_number)
+    extractor = Extractor(tmp_dir, self.run_number)
+    links = extractor.run()
+    self.save_links(links)
 
   def run(self):
-    fetch_complete = False
-    fetcher = Fetcher(url_file)
-    fetch_complete = fetcher.run()
-    while not fetch_complete:
-      pass
-    extractor = Extractor("tmp")
-    extractor.run()
-
-# if __name__ == "__main__":
-#   url_file = sys.argv[1]
-#   fetcher = Fetcher(url_file)
-#   fetcher.run()
-
-# if __name__ == "__main__":
-#   urls_directory = sys.argv[1]
-#   extractor = Extractor(urls_directory)
-#   extractor.run()
+    while self.run_number != self.num_of_runs:
+      self.single_run()
+      self.run_number += 1
 
 if __name__ == "__main__":
   url_file = sys.argv[1]
-  crawler = Crawler(url_file)
+  num_of_runs = sys.argv[2]
+  crawler = Crawler(url_file, num_of_runs)
   crawler.run()
+

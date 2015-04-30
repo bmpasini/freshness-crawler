@@ -4,12 +4,11 @@ import urllib
 from bs4 import BeautifulSoup
 import csv
 
-# READ FROM TMP FILES INSTEAD OF MEMORY
+# save htmls in memory
 
 class Fetcher(object):
 
   def __init__(self, url_file):
-    self.cnt = 0
     self.url_file = url_file
 
   def get_urls_ary(self):
@@ -77,7 +76,6 @@ class Fetcher(object):
         htmls[url] = response.read()
         print len(htmls), ":", url
         self.save_html(url, htmls[url])
-        self.cnt += 1
       except IOError:
         pass
 
@@ -86,9 +84,9 @@ class Fetcher(object):
     while urls != {}:
       next_fetch_urls = self.next_fetch(urls)
       self.fetch_urls_and_save(htmls, next_fetch_urls)
-    print "Fetched", self.cnt, "urls."
-    # return htmls
-    return True
+    print "Fetched", len(htmls), "urls."
+    return htmls
+    # return True
 
   def run(self):
     urls = self.get_urls() # {domain : [url1, url2, .., urln]}
@@ -98,18 +96,8 @@ class Fetcher(object):
 
 class Extractor(object):
   
-  def __init__(self, dirname):
-    self.dirname = dirname
-
-  def get_all_files(self):
-    print "Loading all filenames"
-    files = []
-    for [path, dirnames, filenames] in os.walk(self.dirname):
-      for filename in filenames:
-        files.append(path + "/" + filename)
-    files.pop(0)
-    print "Done loading filenames", len(files)
-    return files
+  def __init__(self, htmls):
+    self.htmls = htmls
 
   def extract_links(self, html):
     links = []
@@ -123,22 +111,18 @@ class Extractor(object):
         links.append(link)
     return links
 
-  def get_edges_from_file(self, f):
+  def get_edges_from_html(self, origin, html):
     edges = []
-    tmp = open(f, "r")
-    html = " ".join(tmp.readlines())
-    tmp.close
-    origin = urllib.unquote(os.path.basename(os.path.normpath(f)))
     links = self.extract_links(html)
     for link in links:
       edges.append([origin, link])
     return edges
 
-  def get_edges_from_files(self, files):
+  def get_edges_from_htmls(self, htmls):
     edges = []
-    for f in files:
-      print "Loading links from", urllib.unquote(os.path.basename(os.path.normpath(f)))
-      edges += self.get_edges_from_file(f)
+    for url in htmls:
+      print "Loading links from", url
+      edges += self.get_edges_from_html(url, htmls[url])
     return edges
 
   def remove_file(self, path):
@@ -168,8 +152,7 @@ class Extractor(object):
         a.writerow(inverted)
 
   def run(self):
-    files = self.get_all_files()
-    edges = self.get_edges_from_files(files)
+    edges = self.get_edges_from_htmls(self.htmls)
     self.save_edges(edges)
 
 class Crawler(object):
@@ -177,13 +160,20 @@ class Crawler(object):
   def __init__(self, url_file):
     self.url_file = url_file
 
+  def wait_fetch(self, htmls):
+    while True:
+      try:
+        htmls
+      except NameError:
+        pass
+      else:
+        break
+
   def run(self):
-    fetch_complete = False
     fetcher = Fetcher(url_file)
-    fetch_complete = fetcher.run()
-    while not fetch_complete:
-      pass
-    extractor = Extractor("tmp")
+    htmls = fetcher.run()
+    self.wait_fetch(htmls)    
+    extractor = Extractor(htmls)
     extractor.run()
 
 # if __name__ == "__main__":
@@ -200,3 +190,4 @@ if __name__ == "__main__":
   url_file = sys.argv[1]
   crawler = Crawler(url_file)
   crawler.run()
+
