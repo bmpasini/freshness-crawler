@@ -45,17 +45,14 @@ class Fetcher(object):
       if domain not in urls:
         urls[domain] = { "urls" : [], "last_fetch" : datetime.now() - timedelta(0, TIMEOUT_DOMAIN_FETCH) }
       urls[domain]["urls"].append(url)
-      #   urls[domain] = []
-      # urls[domain].append(url)
     return urls
 
   def next_fetch(self, urls):
     fetch_urls = []
     domains_to_remove = []
     for domain in sorted(urls): # ordenar dictionary
-      while urls[domain]["last_fetch"] > datetime.now() - timedelta(0, TIMEOUT_DOMAIN_FETCH): # arrumar valor do timeout
+      while urls[domain]["last_fetch"] > datetime.now() - timedelta(0, TIMEOUT_DOMAIN_FETCH):
         pass
-      # fetch_urls.append(urls[domain].pop())
       fetch_urls.append(urls[domain]["urls"].pop())
       urls[domain]["last_fetch"] = datetime.now()
       if urls[domain]["urls"] == []:
@@ -94,12 +91,12 @@ class Fetcher(object):
     print "Starting fetch number", str(self.run_number)
     htmls = {}
     while urls != {}:
-      next_fetch_urls = self.next_fetch(urls) # { urls : [url1, url2, .., urln], last_fetch : decreasing # of seconds }
+      next_fetch_urls = self.next_fetch(urls) # { "urls" : [url1, url2, .., urln], "last_fetch" : decreasing # of seconds }
       self.fetch_urls_and_save(htmls, next_fetch_urls)
     print "Fetched", len(htmls), "urls."
 
   def run(self):
-    urls = self.get_urls()  # [{domain : { urls : [url1, url2, .., urln], last_fetch : decreasing # of seconds }}]
+    urls = self.get_urls()  # [{domain : { "urls" : [url1, url2, .., urln], "last_fetch" : decreasing # of seconds }}]
     self.fetch_and_save_all(urls)
 
 
@@ -121,17 +118,20 @@ class Extractor(object):
     return files
 
   def extract_links(self, html):
+    links = []
     soup = BeautifulSoup(html)
     for tag in soup.find_all('a'):
       try:
         link = tag.get('href', None)
         link = str(link)
-        if "http://" in link:
-          self.links.append(link)
-        elif "https://" in link:
-          self.links.append(link)
+        if link not in links: # do not include repeated links
+          if "http://" in link:
+            links.append(link)
+          elif "https://" in link:
+            links.append(link)
       except UnicodeEncodeError:
         pass
+    return links
 
   def get_edges_from_file(self, f):
     edges = []
@@ -139,8 +139,10 @@ class Extractor(object):
     html = " ".join(tmp.readlines())
     tmp.close
     origin = urllib.unquote(os.path.basename(os.path.normpath(f)))
-    self.extract_links(html)
-    for link in self.links:
+    links = self.extract_links(html)
+    for link in links:
+      if link not in self.links:
+        self.links.append(link)
       edges.append([origin, link])
     return edges
 
@@ -150,7 +152,7 @@ class Extractor(object):
     for f in files:
       print "Extracting links from", urllib.unquote(os.path.basename(os.path.normpath(f)))
       edges += self.get_edges_from_file(f)
-    print "Done extracting", len(self.links), "links."
+    print "Successfully extracted", len(self.links), "new links."
     return edges
 
   def run(self):
@@ -182,16 +184,6 @@ class UrlHandler(object):
       for edge in edges:
         a.writerow(edge)
 
-  def save_backlinks(self):
-    edges = ["url", "backlink"] + self.edges
-    backlink_file = "output/run_" + str(self.run_number) + "/backlinks.csv"
-    self.remove_file(backlink_file)
-    with open(backlink_file, 'wb') as fp:
-      a = csv.writer(fp, delimiter=',', quotechar='"')
-      for edge in edges:
-        inverted = [edge[1],edge[0]]
-        a.writerow(inverted)
-
   def get_links(self):
     links = []
     for edge in self.edges:
@@ -206,12 +198,42 @@ class UrlHandler(object):
       for link in set(links):
         fp.write(link + "\n")
 
+  def load_urls_file(self):
+    urls = {}
+    file_name = "output/urls.csv"
+    if not os.path.exists(file_name):
+      file(file_name, 'w').close()
+    with open(file_name, 'wb') as fp:
+      csv_reader = csv.reader(fp, delimiter=',', quotechar='"')
+      if os.path.getsize(file_name):
+        for row in csv_reader:
+          urls[row[0]] = [row[1], row[2]]
+    return urls
+
+  def prepare_urls(self):
+    urls = self.load_urls_file()
+    for edge in self.edges:
+      urls[edge[0]] = [1,self.run_number]
+      if edge[1] not in urls:
+        urls[edge[1]] = [0,None]
+    return urls
+
+  def save_urls(self):
+    urls = self.prepare_urls()
+    file_name = "output/urls.csv"
+    with open(file_name, 'wb') as fp:
+      a = csv.writer(fp, delimiter=',', quotechar='"')
+      for domain in urls:
+        row = [domain] + urls[domain]
+        a.writerow(row)
+
   def run(self):
     self.create_diretory("output")
     self.create_diretory("output/run_" + str(self.run_number))
     self.save_outlinks()
-    self.save_backlinks()
     self.save_links()
+    self.save_urls()
+
 
 class Crawler(object):
 
@@ -231,7 +253,6 @@ class Crawler(object):
     url_handler = UrlHandler(edges, self.run_number)
     url_handler.run()
     
-
   def run(self):
     while self.run_number <= self.num_of_runs:
       self.single_run()

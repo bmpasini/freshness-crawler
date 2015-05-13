@@ -1,9 +1,4 @@
 # freshness-crawler
 
-Run Fetcher:
-  `cd fetcher`
-  `python fetcher.py input/urls.txt`
-
-Run Extractor:
-  `cd extractor`
-  `python extractor.py ../fetcher/output/`
+Run Crawler:
+  `python src/crawler.py input/urls.txt <depth_of_crawl>`
