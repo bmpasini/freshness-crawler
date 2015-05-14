@@ -1,10 +1,12 @@
 import sys
 import os
-import urllib
+import urllib2
 from bs4 import BeautifulSoup
 import csv
 from datetime import timedelta
 from datetime import datetime
+import json
+import shutil
 
 TIMEOUT_DOMAIN_FETCH = 0 # seconds
 
@@ -65,39 +67,50 @@ class Fetcher(object):
     if not os.path.exists(path):
       os.makedirs(path)
 
-  def save_html(self, url, html):
+  def save_response(self, url, response):
     self.create_diretory("tmp")
     tmp_dir = "tmp/run_" + str(self.run_number)
     self.create_diretory(tmp_dir)
     domain = self.parse_domain(url)
     path = tmp_dir + "/" + domain
     self.create_diretory(path)
-    file_path = path + "/" + urllib.quote(url, '')
-    tmp = open(file_path, 'a')
-    tmp.write(html)
+    file_path = path + "/" + urllib2.quote(url, '')
+    tmp = open(file_path, 'w+')
+    tmp.write(response)
     tmp.close()
 
-  def fetch_urls_and_save(self, htmls, urls):
+  # read response and return whatever is needed in the form of a stringified dictionary
+  def read_response(self, response):
+    html = response.read()
+    # response_dict = { "html" : html }
+    headers = response.info().headers
+    response_dict = { "html" : html, "headers" : headers, "timestamp" : datetime.now().strftime("%m/%d/%Y %H:%M:%S") }
+    return json.dumps(response_dict)
+
+  def fetch_urls_and_save(self, responses, urls):
     for url in urls:
       try:
-        response = urllib.urlopen(url)
-        htmls[url] = response.read()
-        print len(htmls), ":", url
-        self.save_html(url, htmls[url])
+        response = urllib2.urlopen(url)
+        # responses[url] = response.read()
+        responses[url] = self.read_response(response)
+        print len(responses), ":", url
+        self.save_response(url, responses[url])
       except IOError:
         pass
 
   def fetch_and_save_all(self, urls):
     print "Starting fetch number", str(self.run_number)
-    htmls = {}
+    responses = {}
     while urls != {}:
       next_fetch_urls = self.next_fetch(urls) # { "urls" : [url1, url2, .., urln], "last_fetch" : decreasing # of seconds }
-      self.fetch_urls_and_save(htmls, next_fetch_urls)
-    print "Fetched", len(htmls), "urls."
+      self.fetch_urls_and_save(responses, next_fetch_urls)
+    print "Fetched", len(responses), "urls."
+    return responses
 
   def run(self):
     urls = self.get_urls()  # [{domain : { "urls" : [url1, url2, .., urln], "last_fetch" : decreasing # of seconds }}]
-    self.fetch_and_save_all(urls)
+    responses = self.fetch_and_save_all(urls)
+    return responses
 
 
 class Extractor(object):
@@ -133,12 +146,18 @@ class Extractor(object):
         pass
     return links
 
+  def get_html_from_file(self, f):
+    tmp = open(f, "r")
+    response_str = " ".join(tmp.readlines())
+    response_dict = json.loads(response_str)
+    html = response_dict["html"]
+    tmp.close
+    return html
+
   def get_edges_from_file(self, f):
     edges = []
-    tmp = open(f, "r")
-    html = " ".join(tmp.readlines())
-    tmp.close
-    origin = urllib.unquote(os.path.basename(os.path.normpath(f)))
+    html = self.get_html_from_file(f)
+    origin = urllib2.unquote(os.path.basename(os.path.normpath(f)))
     links = self.extract_links(html)
     for link in links:
       if link not in self.links:
@@ -150,7 +169,7 @@ class Extractor(object):
     edges = []
     print "Starting extraction number", str(self.run_number)
     for f in files:
-      print "Extracting links from", urllib.unquote(os.path.basename(os.path.normpath(f)))
+      print "Extracting links from", urllib2.unquote(os.path.basename(os.path.normpath(f)))
       edges += self.get_edges_from_file(f)
     print "Successfully extracted", len(self.links), "new links."
     return edges
@@ -219,11 +238,11 @@ class UrlHandler(object):
     return urls
 
   def save_urls(self):
-    urls = self.prepare_urls()
+    urls = self.prepare_urls() # {url : [fetched?, run_number]}
     file_name = "output/urls.csv"
     with open(file_name, 'wb') as fp:
       a = csv.writer(fp, delimiter=',', quotechar='"')
-      for domain in urls:
+      for domain in sorted(urls):
         row = [domain] + urls[domain]
         a.writerow(row)
 
@@ -242,9 +261,16 @@ class Crawler(object):
     self.run_number = 1
     self.num_of_runs = num_of_runs
 
+  def clear_folder(self, path):
+    if os.path.exists(path):
+      shutil.rmtree(path)
+
   def single_run(self):
     if self.run_number != 1:
       self.url_file = "output/run_" + str(self.run_number - 1) + "/urls.txt" 
+    else:
+      self.clear_folder("tmp")
+      self.clear_folder("output")
     fetcher = Fetcher(self.url_file, self.run_number)
     fetcher.run()
     tmp_dir = "tmp/run_" + str(self.run_number)
