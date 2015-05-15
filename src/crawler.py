@@ -84,7 +84,7 @@ class Fetcher(object):
     html = response.read()
     # response_dict = { "html" : html }
     headers = response.info().headers
-    response_dict = { "html" : html, "headers" : headers, "timestamp" : datetime.now().strftime("%m/%d/%Y %H:%M:%S") }
+    response_dict = { "html" : unicode(html, "ISO-8859-1"), "headers" : headers, "timestamp" : datetime.now().strftime("%m/%d/%Y %H:%M:%S") }
     return json.dumps(response_dict)
 
   def fetch_urls_and_save(self, responses, urls):
@@ -151,18 +151,19 @@ class Extractor(object):
     response_str = " ".join(tmp.readlines())
     response_dict = json.loads(response_str)
     html = response_dict["html"]
+    timestamp = response_dict["timestamp"]
     tmp.close
-    return html
+    return html, timestamp
 
   def get_edges_from_file(self, f):
     edges = []
-    html = self.get_html_from_file(f)
+    html, timestamp = self.get_html_from_file(f)
     origin = urllib2.unquote(os.path.basename(os.path.normpath(f)))
     links = self.extract_links(html)
     for link in links:
       if link not in self.links:
         self.links.append(link)
-      edges.append([origin, link])
+      edges.append([origin, link, timestamp])
     return edges
 
   def get_edges_from_files(self, files):
@@ -201,56 +202,81 @@ class UrlHandler(object):
     with open(outlink_file, 'wb') as fp:
       a = csv.writer(fp, delimiter=',', quotechar='"')
       for edge in edges:
-        a.writerow(edge)
-
-  def get_links(self):
-    links = []
-    for edge in self.edges:
-      links.append(edge[1])
-    return links
-
-  def save_links(self):
-    links = self.get_links()
-    file_name = "output/run_" + str(self.run_number) + "/urls.txt" 
-    self.remove_file(file_name)
-    with open(file_name, "a+") as fp:
-      for link in set(links):
-        fp.write(link + "\n")
+        a.writerow(edge[:-1])
 
   def load_urls_file(self):
     urls = {}
     file_name = "output/urls.csv"
     if not os.path.exists(file_name):
       file(file_name, 'w').close()
-    with open(file_name, 'wb') as fp:
+    with open(file_name, 'r') as fp:
       csv_reader = csv.reader(fp, delimiter=',', quotechar='"')
       if os.path.getsize(file_name):
         for row in csv_reader:
-          urls[row[0]] = [row[1], row[2]]
+          urls[row[0]] = [row[1], row[2], row[3]]
     return urls
 
-  def prepare_urls(self):
+  def prepare_urls(self): # review this
     urls = self.load_urls_file()
     for edge in self.edges:
-      urls[edge[0]] = [1,self.run_number]
+      # if edge[0] in urls: # what if an outlink points to a page that has already been crawled? Here, I'm just ignoring...
+      #   if urls[edge[0]][0] == 1:
+      #     continue
+      urls[edge[0]] = [1,self.run_number,edge[2]]
+      print urls[edge[0]]
       if edge[1] not in urls:
-        urls[edge[1]] = [0,None]
+        urls[edge[1]] = [0,None,None]
+        print urls[edge[1]]
     return urls
 
   def save_urls(self):
     urls = self.prepare_urls() # {url : [fetched?, run_number]}
     file_name = "output/urls.csv"
-    with open(file_name, 'wb') as fp:
+    with open(file_name, 'w+') as fp:
       a = csv.writer(fp, delimiter=',', quotechar='"')
-      for domain in sorted(urls):
-        row = [domain] + urls[domain]
+      for url in sorted(urls):
+        row = [url] + urls[url]
         a.writerow(row)
 
   def run(self):
     self.create_diretory("output")
     self.create_diretory("output/run_" + str(self.run_number))
     self.save_outlinks()
-    self.save_links()
+    self.save_urls()
+
+
+class Scheduler(object):
+
+  def __init__(self, num_of_runs):
+    self.url_file = "output/urls.csv"
+    self.run_number = 1
+    self.num_of_runs = num_of_runs
+
+  def remove_file(self, path):
+    if os.path.exists(path):
+      os.remove(path)
+
+  def get_urls(self):
+    urls = []
+    file_name = "output/urls.csv"
+    with open(file_name, 'r') as fp:
+      csv_reader = csv.reader(fp, delimiter=',', quotechar='"')
+      for row in csv_reader:
+        url = row[0]
+        been_crawled = row[1]
+        if been_crawled == "0":
+          urls.append(url)
+    return urls
+
+  def save_urls(self):
+    urls = self.get_urls()
+    file_name = "output/run_" + str(self.run_number) + "/urls.txt" 
+    self.remove_file(file_name)
+    with open(file_name, "a+") as fp:
+      for url in set(urls):
+        fp.write(url + "\n")
+
+  def run(self):
     self.save_urls()
 
 
@@ -265,12 +291,15 @@ class Crawler(object):
     if os.path.exists(path):
       shutil.rmtree(path)
 
-  def single_run(self):
+  def prepare_files(self):
     if self.run_number != 1:
       self.url_file = "output/run_" + str(self.run_number - 1) + "/urls.txt" 
     else:
       self.clear_folder("tmp")
       self.clear_folder("output")
+
+  def single_run(self):
+    self.prepare_files()
     fetcher = Fetcher(self.url_file, self.run_number)
     fetcher.run()
     tmp_dir = "tmp/run_" + str(self.run_number)
@@ -278,7 +307,9 @@ class Crawler(object):
     edges = extractor.run()
     url_handler = UrlHandler(edges, self.run_number)
     url_handler.run()
-    
+    scheduler = Scheduler(self.run_number)
+    scheduler.run()
+
   def run(self):
     while self.run_number <= self.num_of_runs:
       self.single_run()
