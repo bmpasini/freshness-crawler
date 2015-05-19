@@ -61,3 +61,4 @@ class UrlHandler(object):
     self.create_diretory("output/run_" + str(self.run_number))
     self.save_outlinks()
     self.save_urls()
+

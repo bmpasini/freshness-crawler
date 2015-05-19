@@ -27,10 +27,14 @@ class Extractor(object):
       try:
         link = tag.get('href', None)
         link = str(link)
+        # print link
+        if link:
+            link = link[:-1] if link[-1] == "/" else link # remove '/' from end of url (in order to avoid duplicate urls)
+            # if link[1] == "/": # add dominio antes do path
         if link not in links: # do not include repeated links
-          if "http://" in link:
+          if link[:7] == "http://":
             links.append(link)
-          elif "https://" in link:
+          elif link[:8] == "https://":
             links.append(link)
       except UnicodeEncodeError:
         pass
@@ -69,3 +73,4 @@ class Extractor(object):
     files = self.get_all_files()
     edges = self.get_edges_from_files(files)
     return edges # edges stay in memory this way
+

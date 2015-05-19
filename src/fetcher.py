@@ -107,3 +107,4 @@ class Fetcher(object):
     urls = self.get_urls()  # [{domain : { "urls" : [url1, url2, .., urln], "last_fetch" : decreasing # of seconds }}]
     responses = self.fetch_and_save_all(urls)
     return responses
+
