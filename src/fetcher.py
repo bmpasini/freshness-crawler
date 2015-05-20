@@ -3,6 +3,7 @@ import urllib2
 from datetime import timedelta
 from datetime import datetime
 import json
+import ssl
 
 TIMEOUT_DOMAIN_FETCH = 0 # seconds
 
@@ -83,15 +84,34 @@ class Fetcher(object):
     response_dict = { "html" : unicode(html, "ISO-8859-1"), "headers" : headers, "timestamp" : datetime.now().strftime("%m/%d/%Y %H:%M:%S") }
     return json.dumps(response_dict)
 
+  # def url_fix(s, charset='utf-8'):
+  #   if isinstance(s, unicode):
+  #     s = s.encode(charset, 'ignore')
+  #   scheme, netloc, path, qs, anchor = urlparse.urlsplit(s)
+  #   path = urllib.quote(path, '/%')
+  #   qs = urllib.quote_plus(qs, ':&=')
+  #   return urlparse.urlunsplit((scheme, netloc, path, qs, anchor))
+
+  def url_opener(self, url):
+    if url[:7] != "http://" and url[:8] != "https://":
+      url = "http://" + url
+    try:
+      return urllib2.urlopen(url)
+    except ssl.CertificateError:
+      pass
+
   def fetch_urls_and_save(self, responses, urls):
     for url in urls:
       try:
-        response = urllib2.urlopen(url)
+        # url = url_fix(url)
+        response = self.url_opener(url)
         # responses[url] = response.read()
         responses[url] = self.read_response(response)
         print len(responses), ":", url
         self.save_response(url, responses[url])
       except IOError:
+        pass
+      except AttributeError: # skip https site with invalid ssl certificate
         pass
 
   def fetch_and_save_all(self, urls):
