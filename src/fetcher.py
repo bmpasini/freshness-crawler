@@ -4,8 +4,11 @@ from datetime import timedelta
 from datetime import datetime
 import json
 import ssl
+import httplib
+import socket
 
 TIMEOUT_DOMAIN_FETCH = 0 # seconds
+WAIT_SERVER_RESPONSE_TIME = 1 # how long to wait for a server response
 
 class Fetcher(object):
 
@@ -78,32 +81,34 @@ class Fetcher(object):
 
   # read response and return whatever is needed in the form of a stringified dictionary
   def read_response(self, response):
-    html = response.read()
-    # response_dict = { "html" : html }
+    try:
+      html = response.read()
+    except httplib.IncompleteRead as e:
+      html = e.partial
     headers = response.info().headers
-    response_dict = { "html" : unicode(html, "ISO-8859-1"), "headers" : headers, "timestamp" : datetime.now().strftime("%m/%d/%Y %H:%M:%S") }
+    response_dict = { "html" : unicode(html, "ISO-8859-1"), "headers" : unicode(str(headers), "ISO-8859-1"), "timestamp" : datetime.now().strftime("%m/%d/%Y %H:%M:%S") }
     return json.dumps(response_dict)
 
-  # def url_fix(s, charset='utf-8'):
-  #   if isinstance(s, unicode):
-  #     s = s.encode(charset, 'ignore')
-  #   scheme, netloc, path, qs, anchor = urlparse.urlsplit(s)
-  #   path = urllib.quote(path, '/%')
-  #   qs = urllib.quote_plus(qs, ':&=')
-  #   return urlparse.urlunsplit((scheme, netloc, path, qs, anchor))
-
+  # need help revising what to do in error cases...
   def url_opener(self, url):
     if url[:7] != "http://" and url[:8] != "https://":
       url = "http://" + url
     try:
-      return urllib2.urlopen(url)
-    except ssl.CertificateError:
-      pass
+      return urllib2.urlopen(url, timeout = WAIT_SERVER_RESPONSE_TIME)
+    except urllib2.HTTPError as e: # what to do with http errors?
+      print url, ":", e
+    except socket.timeout as e: # wait no more and N seconds trying to open a url, otherwise skip it
+      print url, ":", e
+    except urllib2.URLError as e: # skip URL Errors (it includes http errors)
+      print url, ":", e
+    except ssl.CertificateError as e: # skip https sites with invalid ssl certificate
+      print url, ":", e
+    except httplib.BadStatusLine as e: # the server sometimes doesn't respond with anything, skip those urls
+      print url, ":", e
 
   def fetch_urls_and_save(self, responses, urls):
     for url in urls:
       try:
-        # url = url_fix(url)
         response = self.url_opener(url)
         # responses[url] = response.read()
         responses[url] = self.read_response(response)
