@@ -1,6 +1,7 @@
 import os
 import urllib2
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup, SoupStrainer
+from urlparse import urljoin
 import json
 
 class Extractor(object):
@@ -20,9 +21,9 @@ class Extractor(object):
     print "Done loading", len(files), "filenames"
     return files
 
-  def extract_links(self, html):
+  def extract_links(self, html, url):
     links = []
-    soup = BeautifulSoup(html)
+    soup = BeautifulSoup(html, parseOnlyThese=SoupStrainer('a'))
     for tag in soup.find_all('a'):
       try:
         link = tag.get('href', None)
@@ -36,6 +37,8 @@ class Extractor(object):
             links.append(link)
           elif link[:8] == "https://":
             links.append(link)
+          elif link != None and link != '#' and 'javascript' not in link:
+            links.append(urljoin(url, link))
       except UnicodeEncodeError:
         pass
     return links
@@ -53,7 +56,7 @@ class Extractor(object):
     edges = []
     html, timestamp = self.get_html_from_file(f)
     origin = urllib2.unquote(os.path.basename(os.path.normpath(f)))
-    links = self.extract_links(html)
+    links = self.extract_links(html, origin)
     for link in links:
       if link not in self.links:
         self.links.append(link)
