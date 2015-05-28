@@ -29,7 +29,7 @@ class Scheduler(object):
     file_name = "output/run_" + str(self.run_number) + "/urls.txt" 
     self.remove_file(file_name)
     with open(file_name, "a+") as fp:
-      for url in set(urls):
+      for url in sorted(set(urls)):
         fp.write(url + "\n")
 
   def run(self):

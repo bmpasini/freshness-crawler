@@ -6,10 +6,9 @@ import json
 import ssl
 import httplib
 import socket
-import grequests
 
 TIMEOUT_DOMAIN_FETCH = 0 # seconds
-WAIT_SERVER_RESPONSE_TIME = 15 # how long to wait for a server response // 10s a 30s
+WAIT_SERVER_RESPONSE_TIME = 1 # how long to wait for a server response // 10s a 30s
 
 class Fetcher(object):
 
@@ -83,25 +82,43 @@ class Fetcher(object):
   # read response and return whatever is needed in the form of a stringified json
   def read_response(self, response):
     try:
-      html = response.text
+      html = response.read()
     except httplib.IncompleteRead as e:
       html = e.partial
-    headers = response.headers
-    status_code = response.status_code
-    response_dict = { "html" : html, "headers" : unicode(str(headers), "ISO-8859-1"), "status_code" : status_code, "timestamp" : datetime.now().strftime("%m/%d/%Y %H:%M:%S") }
+    headers = response.info().headers
+    response_dict = { "html" : unicode(html, "ISO-8859-1"), "headers" : unicode(str(headers), "ISO-8859-1"), "timestamp" : datetime.now().strftime("%m/%d/%Y %H:%M:%S") }
     return json.dumps(response_dict)
 
+  # need help revising what to do in error cases...
+  def url_opener(self, url):
+    if url[:7] != "http://" and url[:8] != "https://":
+      url = "http://" + url
+    try:
+      return urllib2.urlopen(url, timeout = WAIT_SERVER_RESPONSE_TIME) # http://stackoverflow.com/questions/5808138/python-example-of-urllib2-asynchronous-threaded-request-using-https
+      
+      # O que fazer com esses erros? # HTTP Error 403: Forbidden # --> Tentar abrir com https
+    except urllib2.HTTPError as e: # what to do with http errors?
+      print url, ":", e
+    except socket.timeout as e: # wait no more and N seconds trying to open a url, otherwise skip it
+      print url, ":", e
+    except urllib2.URLError as e: # skip URL Errors (it includes http errors)
+      print url, ":", e
+    except ssl.CertificateError as e: # skip https sites with invalid ssl certificate
+      print url, ":", e
+    except httplib.BadStatusLine as e: # the server sometimes doesn't respond with anything, skip those urls
+      print url, ":", e
+
   def fetch_urls_and_save(self, responses, urls):
-    requests = (grequests.get(url, timeout=WAIT_SERVER_RESPONSE_TIME) for url in urls)
-    for response in grequests.map(requests):
+    for url in urls:
       try:
-        url = str(response.url)
+        response = self.url_opener(url)
+        # responses[url] = response.read()
         responses[url] = self.read_response(response)
         print len(responses), ":", url
         self.save_response(url, responses[url])
       except IOError:
         pass
-      except AttributeError: # skip https sites with invalid ssl certificate
+      except AttributeError: # skip https site with invalid ssl certificate
         pass
 
   def fetch_and_save_all(self, urls):
