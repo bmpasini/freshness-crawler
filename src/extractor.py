@@ -23,22 +23,22 @@ class Extractor(object):
 
   def extract_links(self, html, url):
     links = []
-    soup = BeautifulSoup(html, parseOnlyThese=SoupStrainer('a'))
+    soup = BeautifulSoup(html, parse_only=SoupStrainer('a'))
     for tag in soup.find_all('a'):
       try:
         link = tag.get('href', None)
         link = str(link)
-        # print link
         if link:
             link = link[:-1] if link[-1] == "/" else link # remove '/' from end of url (in order to avoid duplicate urls)
-            # if link[1] == "/": # add dominio antes do path
         if link not in links: # do not include repeated links
           if link[:7] == "http://":
             links.append(link)
           elif link[:8] == "https://":
             links.append(link)
-          elif link != None and link != '#' and 'javascript' not in link:
-            links.append(urljoin(url, link))
+          elif link != 'None' and link != '#' and 'javascript' not in link:
+            link = urljoin(url, link)
+            if link not in links:
+              links.append(link)
       except UnicodeEncodeError:
         pass
     return links

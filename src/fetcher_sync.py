@@ -95,7 +95,6 @@ class Fetcher(object):
       url = "http://" + url
     try:
       return urllib2.urlopen(url, timeout = WAIT_SERVER_RESPONSE_TIME) # http://stackoverflow.com/questions/5808138/python-example-of-urllib2-asynchronous-threaded-request-using-https
-      
       # O que fazer com esses erros? # HTTP Error 403: Forbidden # --> Tentar abrir com https
     except urllib2.HTTPError as e: # what to do with http errors?
       print url, ":", e

@@ -6,10 +6,14 @@ import json
 import ssl
 import httplib
 import socket
-import grequests
+import gevent
+import requests
+
+gevent.monkey.patch_all(thread=False)
+requests.packages.urllib3.disable_warnings()
 
 TIMEOUT_DOMAIN_FETCH = 0 # seconds
-WAIT_SERVER_RESPONSE_TIME = 15 # how long to wait for a server response // 10s a 30s
+WAIT_SERVER_RESPONSE_TIME = 10 # how long to wait for a server response // 10s a 30s
 
 class Fetcher(object):
 
@@ -44,6 +48,9 @@ class Fetcher(object):
     urls = {}
     urls_ary = self.get_urls_ary()
     for url in urls_ary:
+      url = urllib2.unquote(url)
+      if url[:7] != "http://" and url[:8] != "https://": # use only if input urls doesn't have http/https in front of them
+        url = "http://" + url
       domain = self.parse_domain(url)
       if domain not in urls:
         urls[domain] = { "urls" : [], "last_fetch" : datetime.now() - timedelta(0, TIMEOUT_DOMAIN_FETCH) }
@@ -88,21 +95,26 @@ class Fetcher(object):
       html = e.partial
     headers = response.headers
     status_code = response.status_code
+    print status_code
     response_dict = { "html" : html, "headers" : unicode(str(headers), "ISO-8859-1"), "status_code" : status_code, "timestamp" : datetime.now().strftime("%m/%d/%Y %H:%M:%S") }
     return json.dumps(response_dict)
 
+  def gevent_worker(self, url, responses):
+    try:
+      response = requests.get(url, verify=False, timeout=WAIT_SERVER_RESPONSE_TIME)
+      responses[url] = self.read_response(response)
+      print len(responses), ":", url
+      self.save_response(url, responses[url])
+    except IOError:
+      pass
+    except AttributeError: # skip https sites with invalid ssl certificate
+      pass
+    # response.close() # close the responses, so they don't keep the socket open
+
+
   def fetch_urls_and_save(self, responses, urls):
-    requests = (grequests.get(url, timeout=WAIT_SERVER_RESPONSE_TIME) for url in urls)
-    for response in grequests.map(requests):
-      try:
-        url = str(response.url)
-        responses[url] = self.read_response(response)
-        print len(responses), ":", url
-        self.save_response(url, responses[url])
-      except IOError:
-        pass
-      except AttributeError: # skip https sites with invalid ssl certificate
-        pass
+    jobs = [gevent.spawn(self.gevent_worker, url, responses) for url in urls]
+    gevent.joinall(jobs)
 
   def fetch_and_save_all(self, urls):
     print "Starting fetch number", str(self.run_number)
