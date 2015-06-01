@@ -8,7 +8,7 @@ requests.packages.urllib3.disable_warnings()
 # urls = ['http://httpbin.org/status/404', 'http://httpbin.org/status/302']
 
 def get_urls_ary():
-  tmp = open('/Users/brunomacedo/Desktop/NYU-Poly/3rd-Semester/Memex/code/freshness-crawler/input/urls.txt', "r")
+  tmp = open('/Users/brunomacedo/Desktop/NYU-Poly/3rd-Semester/Memex/code/freshness-crawler/input/urlsComplete.txt', "r")
   urls = map(lambda x: x.replace("\n", ""), tmp.readlines())
   tmp.close()
   return urls

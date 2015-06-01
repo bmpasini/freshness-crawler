@@ -6,11 +6,16 @@ import json
 import ssl
 import httplib
 import socket
-import gevent
 import requests
+import gevent
+from gevent import monkey
+from gevent.pool import Pool
 
 gevent.monkey.patch_all(thread=False)
 requests.packages.urllib3.disable_warnings()
+
+# import imp
+# gevent = imp.load_source('gevent', '/home/vgc/bmpasini/freshness-crawler/gevent/gevent.py')
 
 TIMEOUT_DOMAIN_FETCH = 0 # seconds
 WAIT_SERVER_RESPONSE_TIME = 10 # how long to wait for a server response // 10s a 30s
@@ -95,7 +100,7 @@ class Fetcher(object):
       html = e.partial
     headers = response.headers
     status_code = response.status_code
-    print status_code
+    # print status_code
     response_dict = { "html" : html, "headers" : unicode(str(headers), "ISO-8859-1"), "status_code" : status_code, "timestamp" : datetime.now().strftime("%m/%d/%Y %H:%M:%S") }
     return json.dumps(response_dict)
 
@@ -111,10 +116,28 @@ class Fetcher(object):
       pass
     # response.close() # close the responses, so they don't keep the socket open
 
-
   def fetch_urls_and_save(self, responses, urls):
-    jobs = [gevent.spawn(self.gevent_worker, url, responses) for url in urls]
-    gevent.joinall(jobs)
+    pool = Pool(200)
+    for url in urls:
+      pool.spawn(self.gevent_worker, url, responses)
+    pool.join()
+    # jobs = [gevent.spawn(self.gevent_worker, url, responses) for url in urls]
+    # gevent.joinall(jobs)
+
+  # def fetch_urls_and_save(self, responses, urls):
+  #   requests = (grequests.get(url, timeout=WAIT_SERVER_RESPONSE_TIME) for url in urls)
+  #   for response in grequests.map(requests, grequests.Pool(1)):
+  #     # print response.status_code
+  #     try:
+  #       url = str(response.url)
+  #       responses[url] = self.read_response(response)
+  #       print len(responses), ":", url
+  #       self.save_response(url, responses[url])
+  #     except IOError:
+  #       pass
+  #     except AttributeError: # skip https sites with invalid ssl certificate
+  #       pass
+  #     response.close() # close the responses, so they don't keep the socket open
 
   def fetch_and_save_all(self, urls):
     print "Starting fetch number", str(self.run_number)

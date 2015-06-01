@@ -1,1 +1,1 @@
-rsync -avzhe ssh --exclude '.git' --progress /Users/brunomacedo/Desktop/NYU-Poly/3rd-Semester/Memex/code/freshness-crawler bmpasini@gray17.poly.edu:.
+rsync -avzhe ssh --exclude '.git' --exclude 'tmp' --exclude 'output' --progress /Users/brunomacedo/Desktop/NYU-Poly/3rd-Semester/Memex/code/freshness-crawler bmpasini@gray17.poly.edu:.
