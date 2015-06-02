@@ -48,6 +48,7 @@ class UrlHandler(object):
     return urls
 
   def save_urls(self):
+    print "Handling new urls"
     urls = self.prepare_urls() # {url : [fetched?, run_number]}
     file_name = "output/urls.csv"
     with open(file_name, 'w+') as fp:

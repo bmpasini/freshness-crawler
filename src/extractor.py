@@ -3,6 +3,11 @@ import urllib2
 from bs4 import BeautifulSoup, SoupStrainer
 from urlparse import urljoin
 import json
+import gevent
+from gevent import monkey
+from gevent.pool import Pool
+
+gevent.monkey.patch_all(thread=False)
 
 class Extractor(object):
   
@@ -22,6 +27,7 @@ class Extractor(object):
     return files
 
   def extract_links(self, html, url):
+    print "Extracting links from", url
     links = []
     soup = BeautifulSoup(html, parse_only=SoupStrainer('a'))
     for tag in soup.find_all('a'):
@@ -52,8 +58,7 @@ class Extractor(object):
     tmp.close
     return html, timestamp
 
-  def get_edges_from_file(self, f):
-    edges = []
+  def get_edges_from_file(self, f, edges):
     html, timestamp = self.get_html_from_file(f)
     origin = urllib2.unquote(os.path.basename(os.path.normpath(f)))
     links = self.extract_links(html, origin)
@@ -61,15 +66,15 @@ class Extractor(object):
       if link not in self.links:
         self.links.append(link)
       edges.append([origin, link, timestamp])
-    return edges
 
   def get_edges_from_files(self, files):
+    pool = Pool(1000)
     edges = []
     print "Starting extraction number", str(self.run_number)
     for f in files:
-      print "Extracting links from", urllib2.unquote(os.path.basename(os.path.normpath(f)))
-      edges += self.get_edges_from_file(f)
-    print "Successfully extracted", len(self.links), "new links."
+      pool.spawn(self.get_edges_from_file, f, edges)
+    pool.join()
+    print "Successfully extracted", len(self.links), "new links"
     return edges
 
   def run(self):

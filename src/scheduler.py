@@ -25,6 +25,7 @@ class Scheduler(object):
     return urls
 
   def save_urls(self):
+    print "Scheduling next task"
     urls = self.get_urls()
     file_name = "output/run_" + str(self.run_number) + "/urls.txt" 
     self.remove_file(file_name)

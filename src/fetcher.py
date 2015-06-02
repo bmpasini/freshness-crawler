@@ -14,11 +14,8 @@ from gevent.pool import Pool
 gevent.monkey.patch_all(thread=False)
 requests.packages.urllib3.disable_warnings()
 
-# import imp
-# gevent = imp.load_source('gevent', '/home/vgc/bmpasini/freshness-crawler/gevent/gevent.py')
-
 TIMEOUT_DOMAIN_FETCH = 0 # seconds
-WAIT_SERVER_RESPONSE_TIME = 10 # how long to wait for a server response // 10s a 30s
+WAIT_SERVER_RESPONSE_TIME = 1 # how long to wait for a server response // 10s a 30s
 
 class Fetcher(object):
 
@@ -117,7 +114,7 @@ class Fetcher(object):
     # response.close() # close the responses, so they don't keep the socket open
 
   def fetch_urls_and_save(self, responses, urls):
-    pool = Pool(200)
+    pool = Pool(1000)
     for url in urls:
       pool.spawn(self.gevent_worker, url, responses)
     pool.join()
