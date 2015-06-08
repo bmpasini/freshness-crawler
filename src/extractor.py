@@ -6,6 +6,7 @@ import json
 import gevent
 from gevent import monkey
 from gevent.pool import Pool
+import re
 
 gevent.monkey.patch_all(thread=False)
 
@@ -26,27 +27,58 @@ class Extractor(object):
     print "Done loading", len(files), "filenames"
     return files
 
+  def url_is_well_formed(self, url):
+    regex = re.compile(
+            r'^(?:http)s?://' # http:// or https://
+            r'(?:(?:[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?\.)+(?:[A-Z]{2,6}\.?|[A-Z0-9-]{2,}\.?)|' # domain...
+            r'localhost|' # localhost...
+            r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})' # ...or ip
+            r'(?::\d+)?' # optional port
+            r'(?:/?|[/?]\S+)$', re.IGNORECASE)
+    if regex.search(url): # test if is well formed
+      try:
+        url.decode('utf-8') # test if it is unicode
+        return True
+      except UnicodeError:
+        return False
+    else:
+      return False
+
+  def is_blacklisted(self, url):
+    regex = re.compile(r'(\.pdf$)|(\.xls$)|(\.xlsx$)|(\.doc$)|(\.docx$)|(\.ppt$)|(\.pptx$)|(\.rss$)|(\.jpeg$)|(\.mp3$)|(\.mp4$)|(\.wmv$)|(\.jpg$)|(\.png$)|(\.gif$)|(\.exe$)|(\.dmg$)|(\.aac$)|(\.ogg$)|(\.tar$)|(\.tar\.gz$)|(\.tgz$)|(\.avi$)|(\.rmvb$)|(\.xsl$)|(\.jsp$)|(\.plex$)', re.IGNORECASE) # skip urls that end in those extensions
+    if regex.search(url): # test if is blacklisted
+      return True
+    else:
+      return False
+
+  def clean_link(self, link, url):
+    try:
+      link = str(link)
+      if link:
+        if link[:7] != "http://" and link[:8] != "https://": # if relative path, join with url domain
+          link = urljoin(url, link)
+        link = link[:-1] if link[-1] == "/" else link # remove '/' from end of url (in order to avoid duplicate urls)
+        link = link.split('#', 1)[0] # remove everything after '#'
+        link = link.replace('&amp', '&') # replace &amp with &
+        if self.is_blacklisted(link): # skip blacklisted urls
+          return None
+        else:
+          if self.url_is_well_formed(link):
+            return link
+          else:
+            return None
+    except UnicodeEncodeError:
+      return None
+
   def extract_links(self, html, url):
     print "Extracting links from", url
     links = []
     soup = BeautifulSoup(html, parse_only=SoupStrainer('a'))
     for tag in soup.find_all('a'):
-      try:
-        link = tag.get('href', None)
-        link = str(link)
-        if link:
-            link = link[:-1] if link[-1] == "/" else link # remove '/' from end of url (in order to avoid duplicate urls)
-        if link not in links: # do not include repeated links
-          if link[:7] == "http://":
-            links.append(link)
-          elif link[:8] == "https://":
-            links.append(link)
-          elif link != 'None' and link != '#' and 'javascript' not in link:
-            link = urljoin(url, link)
-            if link not in links:
-              links.append(link)
-      except UnicodeEncodeError:
-        pass
+      link = tag.get('href', None)
+      link = self.clean_link(link, url)
+      if link not in links and link != None: # do not include repeated links
+        links.append(link)
     return links
 
   def get_html_from_file(self, f):

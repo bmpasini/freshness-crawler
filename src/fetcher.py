@@ -15,7 +15,7 @@ gevent.monkey.patch_all(thread=False)
 requests.packages.urllib3.disable_warnings()
 
 TIMEOUT_DOMAIN_FETCH = 0 # seconds
-WAIT_SERVER_RESPONSE_TIME = 1 # how long to wait for a server response // 10s a 30s
+WAIT_SERVER_RESPONSE_TIME = 10 # how long to wait for a server response // 10s a 30s
 
 class Fetcher(object):
 
@@ -50,7 +50,7 @@ class Fetcher(object):
     urls = {}
     urls_ary = self.get_urls_ary()
     for url in urls_ary:
-      url = urllib2.unquote(url)
+      # url = urllib2.unquote(url)
       if url[:7] != "http://" and url[:8] != "https://": # use only if input urls doesn't have http/https in front of them
         url = "http://" + url
       domain = self.parse_domain(url)
