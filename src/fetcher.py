@@ -114,7 +114,7 @@ class Fetcher(object):
     # response.close() # close the responses, so they don't keep the socket open
 
   def fetch_urls_and_save(self, responses, urls):
-    pool = Pool(1000)
+    pool = Pool(200)
     for url in urls:
       pool.spawn(self.gevent_worker, url, responses)
     pool.join()

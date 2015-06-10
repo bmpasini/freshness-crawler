@@ -1,0 +1,1 @@
+00 00 * * * sh /san_data/research/bmpasini/freshness-crawler/sh/run.sh

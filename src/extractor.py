@@ -4,8 +4,12 @@ from bs4 import BeautifulSoup, SoupStrainer
 from urlparse import urljoin
 import json
 import gevent
-from gevent import monkey
-from gevent.pool import Pool
+# from gevent import monkey
+# from gevent.pool import Pool
+# from multiprocessing import Pool
+from multiprocessing.dummy import Pool as ThreadPool
+import copy_reg
+import types
 import re
 
 gevent.monkey.patch_all(thread=False)
@@ -16,6 +20,7 @@ class Extractor(object):
     self.dirname = dirname
     self.run_number = run_number
     self.links = []
+    self.edges = []
 
   def get_all_files(self):
     print "Loading all filenames"
@@ -67,6 +72,8 @@ class Extractor(object):
             return link
           else:
             return None
+      else:
+        return None
     except UnicodeEncodeError:
       return None
 
@@ -90,27 +97,48 @@ class Extractor(object):
     tmp.close
     return html, timestamp
 
-  def get_edges_from_file(self, f, edges):
+  def get_edges_from_file(self, f):
     html, timestamp = self.get_html_from_file(f)
     origin = urllib2.unquote(os.path.basename(os.path.normpath(f)))
     links = self.extract_links(html, origin)
     for link in links:
       if link not in self.links:
         self.links.append(link)
-      edges.append([origin, link, timestamp])
+      self.edges.append([origin, link, timestamp])
+
+  def _pickle_method(self, method):
+    func_name = method.im_func.__name__
+    obj = method.im_self
+    cls = method.im_class
+    return self._unpickle_method, (func_name, obj, cls)
+
+  def _unpickle_method(self, func_name, obj, cls):
+    for cls in cls.mro():
+      try:
+        func = cls.__dict__[func_name]
+      except KeyError:
+        pass
+      else:
+        break
+        return func.__get__(obj, cls)
 
   def get_edges_from_files(self, files):
-    pool = Pool(1000)
-    edges = []
     print "Starting extraction number", str(self.run_number)
-    for f in files:
-      pool.spawn(self.get_edges_from_file, f, edges)
+    copy_reg.pickle(types.MethodType, self._pickle_method, self._unpickle_method)
+    pool = ThreadPool()
+    pool.map(self.get_edges_from_file, files)
+    pool.close()
     pool.join()
     print "Successfully extracted", len(self.links), "new links"
-    return edges
+    # pool = Pool(1000)
+    # print "Starting extraction number", str(self.run_number)
+    # for f in files:
+    #   pool.spawn(self.get_edges_from_file, f)
+    # pool.join()
+    # print "Successfully extracted", len(self.links), "new links"
 
   def run(self):
     files = self.get_all_files()
-    edges = self.get_edges_from_files(files)
-    return edges # edges stay in memory this way
+    self.get_edges_from_files(files)
+    return self.edges # edges stay in memory this way
 
