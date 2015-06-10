@@ -3,7 +3,7 @@ import urllib2
 from bs4 import BeautifulSoup, SoupStrainer
 from urlparse import urljoin
 import json
-import gevent
+# import gevent
 # from gevent import monkey
 # from gevent.pool import Pool
 # from multiprocessing import Pool
@@ -11,8 +11,9 @@ from multiprocessing.dummy import Pool as ThreadPool
 import copy_reg
 import types
 import re
+from datetime import datetime
 
-gevent.monkey.patch_all(thread=False)
+# gevent.monkey.patch_all(thread=False)
 
 class Extractor(object):
   
@@ -106,26 +107,26 @@ class Extractor(object):
         self.links.append(link)
       self.edges.append([origin, link, timestamp])
 
-  def _pickle_method(self, method):
-    func_name = method.im_func.__name__
-    obj = method.im_self
-    cls = method.im_class
-    return self._unpickle_method, (func_name, obj, cls)
+  # def _pickle_method(self, method):
+  #   func_name = method.im_func.__name__
+  #   obj = method.im_self
+  #   cls = method.im_class
+  #   return self._unpickle_method, (func_name, obj, cls)
 
-  def _unpickle_method(self, func_name, obj, cls):
-    for cls in cls.mro():
-      try:
-        func = cls.__dict__[func_name]
-      except KeyError:
-        pass
-      else:
-        break
-        return func.__get__(obj, cls)
+  # def _unpickle_method(self, func_name, obj, cls):
+  #   for cls in cls.mro():
+  #     try:
+  #       func = cls.__dict__[func_name]
+  #     except KeyError:
+  #       pass
+  #     else:
+  #       break
+  #       return func.__get__(obj, cls)
 
   def get_edges_from_files(self, files):
     print "Starting extraction number", str(self.run_number)
-    copy_reg.pickle(types.MethodType, self._pickle_method, self._unpickle_method)
-    pool = ThreadPool()
+    # copy_reg.pickle(types.MethodType, self._pickle_method, self._unpickle_method)
+    pool = ThreadPool(64)
     pool.map(self.get_edges_from_file, files)
     pool.close()
     pool.join()
@@ -138,7 +139,10 @@ class Extractor(object):
     # print "Successfully extracted", len(self.links), "new links"
 
   def run(self):
+    start_time = datetime.now()
     files = self.get_all_files()
     self.get_edges_from_files(files)
+    c = datetime.now() - start_time
+    print c
     return self.edges # edges stay in memory this way
 
