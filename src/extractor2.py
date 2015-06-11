@@ -3,27 +3,33 @@ import urllib2
 from bs4 import BeautifulSoup, SoupStrainer
 from urlparse import urljoin
 import json
-from multiprocessing import Process, current_process
+# import gevent
+# from gevent import monkey
+# from gevent.pool import Pool
+# from multiprocessing import Pool
+from multiprocessing.dummy import Pool as ThreadPool
 import copy_reg
 import types
 import re
 from datetime import datetime
-import csv
+
+# gevent.monkey.patch_all(thread=False)
 
 class Extractor(object):
   
   def __init__(self, dirname, run_number):
     self.dirname = dirname
     self.run_number = run_number
+    self.links = []
+    self.edges = []
 
-  def get_all_files(self, dirname, pop=True):
+  def get_all_files(self):
     print "Loading all filenames"
     files = []
-    for [path, dirnames, filenames] in os.walk(dirname):
+    for [path, dirnames, filenames] in os.walk(self.dirname):
       for filename in filenames:
         files.append(path + "/" + filename)
-    if pop:
-      files.pop(0)
+    files.pop(0)
     print "Done loading", len(files), "filenames"
     return files
 
@@ -96,58 +102,48 @@ class Extractor(object):
     html, timestamp = self.get_html_from_file(f)
     origin = urllib2.unquote(os.path.basename(os.path.normpath(f)))
     links = self.extract_links(html, origin)
-    proc_name = current_process().name
-    self.save_links_temporarily(origin, links, timestamp, proc_name)
+    for link in links:
+      if link not in self.links:
+        self.links.append(link)
+      self.edges.append([origin, link, timestamp])
 
-  def save_links_temporarily(self, origin, links, timestamp, proc_name):
-    file_path = 'tmp_links/' + proc_name
-    with open(file_path, 'a+') as fp:
-      a = csv.writer(fp, delimiter=',', quotechar='"')
-      for link in links:
-        a.writerow([origin, link, timestamp])
+  # def _pickle_method(self, method):
+  #   func_name = method.im_func.__name__
+  #   obj = method.im_self
+  #   cls = method.im_class
+  #   return self._unpickle_method, (func_name, obj, cls)
 
-  def create_diretory(self, path):
-    if not os.path.exists(path):
-      os.makedirs(path)
+  # def _unpickle_method(self, func_name, obj, cls):
+  #   for cls in cls.mro():
+  #     try:
+  #       func = cls.__dict__[func_name]
+  #     except KeyError:
+  #       pass
+  #     else:
+  #       break
+  #       return func.__get__(obj, cls)
 
   def get_edges_from_files(self, files):
     print "Starting extraction number", str(self.run_number)
-    self.create_diretory('tmp_links')
     # copy_reg.pickle(types.MethodType, self._pickle_method, self._unpickle_method)
-    for f in files:
-      p = Process(target=self.get_edges_from_file, args=(f,))
-      p.start()
-      p.join()
-
-  def remove_file(self, path):
-    if os.path.exists(path):
-      os.remove(path)
-
-  def bring_temporary_files_into_memory(self):
-    print "Bringing temporary files into memory"
-    links = []
-    edges = []
-    dirname = 'tmp_links'
-    files = self.get_all_files(dirname, False)
-    for f in files:
-      print f
-      with open(f, 'r') as fp:
-        csv_reader = csv.reader(fp, delimiter=',', quotechar='"')
-        if os.path.getsize(f):
-          for edge in csv_reader:
-            link = edge[1]
-            if link not in links:
-              links.append(link)
-            edges.append(edge)
-      self.remove_file(f)
-    print "Successfully extracted", len(links), "new links"
-    return edges
+    pool = ThreadPool(64)
+    # pool = Pool(4)
+    pool.map(self.get_edges_from_file, files)
+    pool.close()
+    pool.join()
+    print "Successfully extracted", len(self.links), "new links"
+    # pool = Pool(1000)
+    # print "Starting extraction number", str(self.run_number)
+    # for f in files:
+    #   pool.spawn(self.get_edges_from_file, f)
+    # pool.join()
+    # print "Successfully extracted", len(self.links), "new links"
 
   def run(self):
     start_time = datetime.now()
-    files = self.get_all_files(self.dirname)
+    files = self.get_all_files()
     self.get_edges_from_files(files)
-    edges = self.bring_temporary_files_into_memory()
     c = datetime.now() - start_time
     print c
-    return edges # edges stay in memory this way
+    return self.edges # edges stay in memory this way
+

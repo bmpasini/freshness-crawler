@@ -10,7 +10,7 @@ cp -r /san_data/research/bmpasini/freshness-crawler/input /san_data/research/bmp
 
 # run crawler
 echo "Start crawler "$1" ...." >> /san_data/research/bmpasini/freshness-crawler/data/$DATETIME/log.txt
-python -u /san_data/research/bmpasini/freshness-crawler/data/$DATETIME/src/crawler.py /san_data/research/bmpasini/freshness-crawler/data/$DATETIME/input/urlsComplete.txt 3 >> /san_data/research/bmpasini/freshness-crawler/data/$DATETIME/log.txt 2>&1
+python -u /san_data/research/bmpasini/freshness-crawler/data/$DATETIME/src/crawler.py /san_data/research/bmpasini/freshness-crawler/data/$DATETIME/input/seed_urls.txt 3 >> /san_data/research/bmpasini/freshness-crawler/data/$DATETIME/log.txt 2>&1
 
 # print datetime when job finished
 echo "Task finished at: $(date)" >> /san_data/research/bmpasini/freshness-crawler/data/$DATETIME/log.txt
