@@ -9,6 +9,7 @@ import types
 import re
 from datetime import datetime
 import csv
+import shutil
 
 class Extractor(object):
   
@@ -123,6 +124,10 @@ class Extractor(object):
     if os.path.exists(path):
       os.remove(path)
 
+  def clear_folder(self, path):
+    if os.path.exists(path):
+      shutil.rmtree(path)
+
   def bring_temporary_files_into_memory(self):
     print "Bringing temporary files into memory"
     links = []
@@ -140,6 +145,7 @@ class Extractor(object):
               links.append(link)
             edges.append(edge)
       self.remove_file(f)
+    self.clear_folder(dirname)
     print "Successfully extracted", len(links), "new links"
     return edges
 
