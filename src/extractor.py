@@ -114,7 +114,6 @@ class Extractor(object):
   def get_edges_from_files(self, files):
     print "Starting extraction number", str(self.run_number)
     self.create_diretory('tmp_links')
-    # copy_reg.pickle(types.MethodType, self._pickle_method, self._unpickle_method)
     for f in files:
       p = Process(target=self.get_edges_from_file, args=(f,))
       p.start()
@@ -135,7 +134,7 @@ class Extractor(object):
     dirname = 'tmp_links'
     files = self.get_all_files(dirname, False)
     for f in files:
-      print f
+      print 'Bringing', f, 'into memory'
       with open(f, 'r') as fp:
         csv_reader = csv.reader(fp, delimiter=',', quotechar='"')
         if os.path.getsize(f):
