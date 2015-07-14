@@ -111,15 +111,31 @@ class Extractor(object):
     if not os.path.exists(path):
       os.makedirs(path)
 
+  def get_edges_from_files_chunk(self, files):
+    for f in files:
+      self.get_edges_from_file(f)
+
+  def file_splitter(self, files, cores=64):
+    files_chunk = [[] for x in range(cores-1)]
+    while files:
+      for i in range(cores-1):
+        if files:
+          files_chunk[i].append(files.pop(0))
+    return files_chunk
+
   def get_edges_from_files(self, files):
     print "Starting extraction number", str(self.run_number)
     self.create_diretory('tmp_links')
-    for f in files:
-      p = Process(target=self.get_edges_from_file, args=(f,))
-      p.start()
-      p.join()
+    files = self.file_splitter(files) # split files in 64 chunks
+    jobs = []
+    for files_chunk in files:
+      j = Process(target=self.get_edges_from_files_chunk, args=(files_chunk,))
+      jobs.append(j)
+      j.start()
+    for j in jobs:
+      j.join()
 
-  def remove_file(self, path):
+  def remove_file(self, path): 
     if os.path.exists(path):
       os.remove(path)
 
@@ -129,7 +145,6 @@ class Extractor(object):
 
   def bring_temporary_files_into_memory(self):
     print "Bringing temporary files into memory"
-    links = []
     edges = []
     dirname = 'tmp_links'
     files = self.get_all_files(dirname, False)
@@ -139,13 +154,10 @@ class Extractor(object):
         csv_reader = csv.reader(fp, delimiter=',', quotechar='"')
         if os.path.getsize(f):
           for edge in csv_reader:
-            link = edge[1]
-            if link not in links:
-              links.append(link)
             edges.append(edge)
       self.remove_file(f)
     self.clear_folder(dirname)
-    print "Successfully extracted", len(links), "new links"
+    print "Successfully extracted", len(edges), "links"
     return edges
 
   def run(self):

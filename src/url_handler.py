@@ -49,7 +49,7 @@ class UrlHandler(object):
 
   def save_urls(self):
     print "Handling new urls"
-    urls = self.prepare_urls() # {url : [fetched?, run_number]}
+    urls = self.prepare_urls() # {url : [fetched?, run_number, timestamp]}
     file_name = "output/urls.csv"
     with open(file_name, 'w+') as fp:
       a = csv.writer(fp, delimiter=',', quotechar='"')
