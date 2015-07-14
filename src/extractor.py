@@ -143,28 +143,28 @@ class Extractor(object):
     if os.path.exists(path):
       shutil.rmtree(path)
 
-  def bring_temporary_files_into_memory(self):
-    print "Bringing temporary files into memory"
-    edges = []
-    dirname = 'tmp_links'
-    files = self.get_all_files(dirname, False)
-    for f in files:
-      print 'Bringing', f, 'into memory'
-      with open(f, 'r') as fp:
-        csv_reader = csv.reader(fp, delimiter=',', quotechar='"')
-        if os.path.getsize(f):
-          for edge in csv_reader:
-            edges.append(edge)
-      self.remove_file(f)
-    self.clear_folder(dirname)
-    print "Successfully extracted", len(edges), "links"
-    return edges
+  # def bring_temporary_files_into_memory(self):
+  #   print "Bringing temporary files into memory"
+  #   edges = []
+  #   dirname = 'tmp_links'
+  #   files = self.get_all_files(dirname, False)
+  #   for f in files:
+  #     print 'Bringing', f, 'into memory'
+  #     with open(f, 'r') as fp:
+  #       csv_reader = csv.reader(fp, delimiter=',', quotechar='"')
+  #       if os.path.getsize(f):
+  #         for edge in csv_reader:
+  #           edges.append(edge)
+  #     self.remove_file(f)
+  #   self.clear_folder(dirname)
+  #   print "Successfully extracted", len(edges), "links"
+  #   return edges
 
   def run(self):
     start_time = datetime.now()
     files = self.get_all_files(self.dirname)
     self.get_edges_from_files(files)
-    edges = self.bring_temporary_files_into_memory()
+    # edges = self.bring_temporary_files_into_memory()
     c = datetime.now() - start_time
-    print c
-    return edges # edges stay in memory this way
+    print "Extractor took", c
+    # return edges # edges stay in memory this way

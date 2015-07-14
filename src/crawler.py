@@ -28,8 +28,8 @@ class Crawler(object):
     self.prepare_files()
     tmp_dir = "tmp/run_" + str(self.run_number)
     Fetcher(self.url_file, self.run_number).run()
-    edges = Extractor(tmp_dir, self.run_number).run()
-    UrlHandler(edges, self.run_number).run()
+    Extractor(tmp_dir, self.run_number).run()
+    UrlHandler(self.run_number).run()
     Scheduler(self.run_number).run()
 
   def run(self):
