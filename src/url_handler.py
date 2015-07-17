@@ -21,12 +21,13 @@ class UrlHandler(object):
     return files
 
   def prepare_urls_and_save_outlinks(self): # process tmp_links files
-    print "Begin tmp_links processing"
+    print "Starting tmp_links processing"
     dirname = 'tmp_links'
     links_files = self.get_all_files(dirname, False)
     urls = self.load_urls_file()
     self.create_outlinks_csv()
     outlink_file = "output/run_" + str(self.run_number) + "/outlinks.csv"
+    cnt = 0
     with open(outlink_file, 'a') as outlink_fp:
       outlink_writer = csv.writer(outlink_fp, delimiter=',', quotechar='"')
       for links_file in links_files:
@@ -35,6 +36,7 @@ class UrlHandler(object):
           links_reader = csv.reader(links_fp, delimiter=',', quotechar='"')
           if os.path.getsize(links_file):
             for edge in links_reader:
+              cnt += 1
               outlink_writer.writerow(edge[:-1]) # write outlink
               # if edge[0] in urls: # what if an outlink points to a page that has already been crawled?
               #   if urls[edge[0]][0] == 1:
@@ -44,7 +46,7 @@ class UrlHandler(object):
                 urls[edge[1]] = [0,None,None]
         self.remove_file(links_file)
     self.clear_folder(dirname)
-    print "Wrap up tmp_links processing"
+    print cnt, "links were extracted"
     return urls # {url : [fetched?, run_number, timestamp]}
 
   def remove_file(self, path):
@@ -87,7 +89,7 @@ class UrlHandler(object):
     return urls
 
   def save_urls(self):
-    print "Handling new urls"
+    print "Starting url handling number", self.run_number
     urls = self.prepare_urls_and_save_outlinks() # {url : [fetched?, run_number, timestamp]}
     urls_file = "output/urls.csv"
     with open(urls_file, 'w+') as urls_fp:

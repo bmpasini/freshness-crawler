@@ -1,6 +1,7 @@
 import sys
 import os
 import shutil
+from datetime import datetime
 from fetcher import Fetcher
 from extractor import Extractor
 from url_handler import UrlHandler
@@ -25,21 +26,27 @@ class Crawler(object):
       self.clear_folder("output")
 
   def single_run(self):
+    start_time = datetime.now()
     self.prepare_files()
     tmp_dir = "tmp/run_" + str(self.run_number)
     Fetcher(self.url_file, self.run_number).run()
     Extractor(tmp_dir, self.run_number).run()
     UrlHandler(self.run_number).run()
     Scheduler(self.run_number).run()
+    c = datetime.now() - start_time
+    print "Crawl number", self.run_number, "took", c
 
   def run(self):
+    print "Starting crawler"
     while self.run_number <= self.num_of_runs:
       self.single_run()
       self.run_number += 1
 
 if __name__ == "__main__":
+  start_time = datetime.now()
   url_file = sys.argv[1]
   num_of_runs = int(sys.argv[2])
   crawler = Crawler(url_file, num_of_runs)
   crawler.run()
-
+  c = datetime.now() - start_time
+  print "Crawler took", c, "in total."

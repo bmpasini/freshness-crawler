@@ -142,11 +142,14 @@ class Fetcher(object):
     while urls != {}:
       next_fetch_urls = self.next_fetch(urls) # { "urls" : [url1, url2, .., urln], "last_fetch" : decreasing # of seconds }
       self.fetch_urls_and_save(responses, next_fetch_urls)
-    print "Fetched", len(responses), "urls."
+    print "Fetched", len(responses), "urls"
     return responses
 
   def run(self):
+    start_time = datetime.now()
     urls = self.get_urls()  # [{domain : { "urls" : [url1, url2, .., urln], "last_fetch" : decreasing # of seconds }}]
     responses = self.fetch_and_save_all(urls)
+    c = datetime.now() - start_time
+    print "Fetcher took", c
     return responses
 

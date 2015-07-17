@@ -1,5 +1,6 @@
 tmp/*
 output/*
 *.pyc
-./log.txt
-./err.txt
+/log.txt
+/err.txt
+/notes.txt

@@ -10,6 +10,9 @@ import re
 from datetime import datetime
 import csv
 import shutil
+import multiprocessing
+
+NUMBER_OF_CORES = multiprocessing.cpu_count()
 
 class Extractor(object):
   
@@ -115,10 +118,10 @@ class Extractor(object):
     for f in files:
       self.get_edges_from_file(f)
 
-  def file_splitter(self, files, cores=64):
-    files_chunk = [[] for x in range(cores-1)]
+  def file_splitter(self, files, cores=NUMBER_OF_CORES):
+    files_chunk = [[] for x in range(cores)]
     while files:
-      for i in range(cores-1):
+      for i in range(cores):
         if files:
           files_chunk[i].append(files.pop(0))
     return files_chunk
