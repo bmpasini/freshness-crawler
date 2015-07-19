@@ -22,7 +22,6 @@ class Fetcher(object):
   def __init__(self, url_file, run_number):
     self.url_file = url_file
     self.run_number = run_number
-    self.urls_cnt = 0
 
   def get_urls_ary(self):
     tmp = open(self.url_file, "r")
@@ -102,38 +101,55 @@ class Fetcher(object):
     response_dict = { "html" : html, "headers" : unicode(str(headers), "ISO-8859-1"), "status_code" : status_code, "timestamp" : datetime.now().strftime("%m/%d/%Y %H:%M:%S") }
     return json.dumps(response_dict)
 
-  def gevent_worker(self, url):
+  def gevent_worker(self, url, responses):
     try:
       response = requests.get(url, verify=False, timeout=WAIT_SERVER_RESPONSE_TIME)
-      response_json = self.read_response(response)
-      response.close() # close the responses, so they don't keep the socket open
-      self.urls_cnt += 1
-      print self.urls_cnt, ":", url
-      self.save_response(url, response_json)
+      responses[url] = self.read_response(response)
+      print len(responses), ":", url
+      self.save_response(url, responses[url])
     except IOError:
       pass
     except AttributeError: # skip https sites with invalid ssl certificate
       pass
+    # response.close() # close the responses, so they don't keep the socket open
 
-  def fetch_urls_and_save(self, urls):
+  def fetch_urls_and_save(self, responses, urls):
     pool = Pool(1000)
     for url in urls:
-      pool.spawn(self.gevent_worker, url)
+      pool.spawn(self.gevent_worker, url, responses)
     pool.join()
-    # jobs = [gevent.spawn(self.gevent_worker, url) for url in urls]
+    # jobs = [gevent.spawn(self.gevent_worker, url, responses) for url in urls]
     # gevent.joinall(jobs)
+
+  # def fetch_urls_and_save(self, responses, urls):
+  #   requests = (grequests.get(url, timeout=WAIT_SERVER_RESPONSE_TIME) for url in urls)
+  #   for response in grequests.map(requests, grequests.Pool(1)):
+  #     # print response.status_code
+  #     try:
+  #       url = str(response.url)
+  #       responses[url] = self.read_response(response)
+  #       print len(responses), ":", url
+  #       self.save_response(url, responses[url])
+  #     except IOError:
+  #       pass
+  #     except AttributeError: # skip https sites with invalid ssl certificate
+  #       pass
+  #     response.close() # close the responses, so they don't keep the socket open
 
   def fetch_and_save_all(self, urls):
     print "Starting fetch number", str(self.run_number)
+    responses = {}
     while urls != {}:
       next_fetch_urls = self.next_fetch(urls) # { "urls" : [url1, url2, .., urln], "last_fetch" : decreasing # of seconds }
-      self.fetch_urls_and_save(next_fetch_urls)
-    print "Fetched", self.urls_cnt, "urls"
+      self.fetch_urls_and_save(responses, next_fetch_urls)
+    print "Fetched", len(responses), "urls"
+    return responses
 
   def run(self):
     start_time = datetime.now()
     urls = self.get_urls()  # [{domain : { "urls" : [url1, url2, .., urln], "last_fetch" : decreasing # of seconds }}]
-    self.fetch_and_save_all(urls)
+    responses = self.fetch_and_save_all(urls)
     c = datetime.now() - start_time
     print "Fetcher took", c
+    return responses
 
