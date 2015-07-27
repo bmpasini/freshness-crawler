@@ -1,0 +1,1 @@
+print (-B $_ ? "$_\n" : "" ) for @ARGV

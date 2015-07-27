@@ -49,7 +49,7 @@ class Extractor(object):
       return False
 
   def is_blacklisted(self, url):
-    regex = re.compile(r'(\.pdf$)|(\.xls$)|(\.xlsx$)|(\.doc$)|(\.docx$)|(\.ppt$)|(\.pptx$)|(\.rss$)|(\.jpeg$)|(\.mp3$)|(\.mp4$)|(\.wmv$)|(\.jpg$)|(\.png$)|(\.gif$)|(\.exe$)|(\.dmg$)|(\.aac$)|(\.ogg$)|(\.tar$)|(\.tar\.gz$)|(\.tgz$)|(\.avi$)|(\.rmvb$)|(\.xsl$)|(\.jsp$)|(\.plex$)', re.IGNORECASE) # skip urls that end in those extensions
+    regex = re.compile(r'(\.pdf$)|(\.xls$)|(\.xlsx$)|(\.doc$)|(\.docx$)|(\.ppt$)|(\.pptx$)|(\.rss$)|(\.jpeg$)|(\.mp3$)|(\.mp4$)|(\.wmv$)|(\.jpg$)|(\.png$)|(\.gif$)|(\.exe$)|(\.dmg$)|(\.aac$)|(\.ogg$)|(\.tar$)|(\.tar\.gz$)|(\.tgz$)|(\.avi$)|(\.rmvb$)|(\.xsl$)|(\.jsp$)|(\.plex$)|(\.tiff$)|(\.img$)|(\.zip$)', re.IGNORECASE) # skip urls that end in these extensions
     if regex.search(url): # test if is blacklisted
       return True
     else:

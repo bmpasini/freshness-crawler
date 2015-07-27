@@ -40,7 +40,10 @@ class JsonToFile(object):
     print file_path
     with open(file_path, 'r') as tmp:
       json_string = " ".join(tmp.readlines())
-      json_dict = json.loads(json_string) if json_string else { "html" : "" }
+      try:
+        json_dict = json.loads(json_string) if json_string else { "html" : "" }
+      except ValueError:
+        json_dict = { "html" : "" }
       html = json_dict["html"]
     return html
 
