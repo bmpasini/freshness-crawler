@@ -39,7 +39,7 @@ class Extractor(object):
             r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})' # ...or ip
             r'(?::\d+)?' # optional port
             r'(?:/?|[/?]\S+)$', re.IGNORECASE)
-    if regex.search(url): # test if is well formed
+    if regex.search(url): # test if it is well formed
       try:
         url.decode('utf-8') # test if it is unicode
         return True

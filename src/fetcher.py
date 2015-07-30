@@ -10,12 +10,17 @@ import requests
 import gevent
 from gevent import monkey
 from gevent.pool import Pool
+from bs4 import BeautifulSoup
+import re
 
 gevent.monkey.patch_all(thread=False)
 requests.packages.urllib3.disable_warnings()
 
 TIMEOUT_DOMAIN_FETCH = 0 # seconds
 WAIT_SERVER_RESPONSE_TIME = 10 # how long to wait for a server response // 10s a 30s
+
+REGEX_CLASSIFIER = True
+REGEX_WORD = r'ebola'
 
 class Fetcher(object):
 
@@ -90,26 +95,43 @@ class Fetcher(object):
     tmp.write(response)
     tmp.close()
 
+  def test_regex(self, html, url):
+    try:
+      title = str(BeautifulSoup(html).title)
+      regex = re.compile(REGEX_WORD, re.IGNORECASE)
+      if regex.search(title) or regex.search(url): # test if title contains the word tested
+        return True
+      else:
+        return False
+    except httplib.IncompleteRead:
+      return False
+
   # read response and return whatever is needed in the form of a stringified json
-  def read_response(self, response):
+  def read_response(self, response, url):
     try:
       html = response.text
     except httplib.IncompleteRead as e:
       html = e.partial
+    if REGEX_CLASSIFIER:
+      if not self.test_regex(html, url):
+        return False # return false if it doesn't pass regex test
     headers = response.headers
     status_code = response.status_code
     # print status_code
     response_dict = { "html" : html, "headers" : unicode(str(headers), "ISO-8859-1"), "status_code" : status_code, "timestamp" : datetime.now().strftime("%m/%d/%Y %H:%M:%S") }
     return json.dumps(response_dict)
 
-  def gevent_worker(self, url):
+  def gevent_worker(self, url): # reads response, test regex and save html in json format
     try:
       response = requests.get(url, verify=False, timeout=WAIT_SERVER_RESPONSE_TIME)
-      response_json = self.read_response(response)
+      response_json = self.read_response(response, url)
       response.close() # close the responses, so they don't keep the socket open
-      self.urls_cnt += 1
-      print self.urls_cnt, ":", url
-      self.save_response(url, response_json)
+      if response_json: # proceed if regex test passed
+        self.urls_cnt += 1
+        print self.urls_cnt, ":", url
+        self.save_response(url, response_json)
+      else:
+        print "Regex failed:", url
     except IOError:
       pass
     except AttributeError: # skip https sites with invalid ssl certificate
