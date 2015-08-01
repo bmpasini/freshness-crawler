@@ -16,7 +16,7 @@ import re
 gevent.monkey.patch_all(thread=False)
 requests.packages.urllib3.disable_warnings()
 
-TIMEOUT_DOMAIN_FETCH = 0 # seconds
+TIMEOUT_DOMAIN_FETCH = 5 # seconds
 WAIT_SERVER_RESPONSE_TIME = 10 # how long to wait for a server response // 10s a 30s
 
 REGEX_CLASSIFIER = True
@@ -28,6 +28,7 @@ class Fetcher(object):
     self.url_file = url_file
     self.run_number = run_number
     self.urls_cnt = 0
+    self.fetched_urls_cnt = 0
 
   def get_urls_ary(self):
     tmp = open(self.url_file, "r")
@@ -126,12 +127,13 @@ class Fetcher(object):
       response = requests.get(url, verify=False, timeout=WAIT_SERVER_RESPONSE_TIME)
       response_json = self.read_response(response, url)
       response.close() # close the responses, so they don't keep the socket open
+      self.urls_cnt += 1
       if response_json: # proceed if regex test passed
-        self.urls_cnt += 1
-        print self.urls_cnt, ":", url
+        self.fetched_urls_cnt += 1
+        print self.fetched_urls_cnt, "/", self.urls_cnt, ":", url
         self.save_response(url, response_json)
       else:
-        print "Regex failed:", url
+        print self.fetched_urls_cnt, "/", self.urls_cnt, "(regex failed):", url
     except IOError:
       pass
     except AttributeError: # skip https sites with invalid ssl certificate
