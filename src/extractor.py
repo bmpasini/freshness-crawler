@@ -100,11 +100,11 @@ class Extractor(object):
     html, timestamp = self.get_html_from_file(f)
     origin = urllib2.unquote(os.path.basename(os.path.normpath(f)))
     links = self.extract_links(html, origin)
-    proc_name = current_process().name
-    self.save_links_temporarily(origin, links, timestamp, proc_name)
+    process_name = current_process().name
+    self.save_links_temporarily(origin, links, timestamp, process_name)
 
-  def save_links_temporarily(self, origin, links, timestamp, proc_name):
-    file_path = 'tmp_links/' + proc_name
+  def save_links_temporarily(self, origin, links, timestamp, process_name):
+    file_path = 'tmp_links/' + process_name
     with open(file_path, 'a+') as fp:
       a = csv.writer(fp, delimiter=',', quotechar='"')
       for link in links:

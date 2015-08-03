@@ -4,3 +4,5 @@ output/*
 /log.txt
 /err.txt
 /notes.txt
+/log-no-regex.txt
+/log-with-regex.txt

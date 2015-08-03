@@ -1,16 +1,17 @@
 DATETIME=$(date +"%Y%m%d%H%M%S")
+CRAWLER_PATH=/san_data/research/bmpasini/freshness-crawler
 
 # create directory whose name is the date and time the job started
-mkdir -p /san_data/research/bmpasini/freshness-crawler/data/$DATETIME && cd /san_data/research/bmpasini/freshness-crawler/data/$DATETIME
-echo "Make directory data/$DATETIME ...." >> /san_data/research/bmpasini/freshness-crawler/data/$DATETIME/log.txt
+mkdir -p $CRAWLER_PATH/data/$DATETIME && cd $CRAWLER_PATH/data/$DATETIME
+echo "Make directory data/$DATETIME ...." >> $CRAWLER_PATH/data/$DATETIME/log.txt
 
 # copy the source files and input files to that directory
-echo "Copy files to directory data/$DATETIME ...." >> /san_data/research/bmpasini/freshness-crawler/data/$DATETIME/log.txt
-cp -r /san_data/research/bmpasini/freshness-crawler/input /san_data/research/bmpasini/freshness-crawler/src /san_data/research/bmpasini/freshness-crawler/sh /san_data/research/bmpasini/freshness-crawler/data/$DATETIME
+echo "Copy files to directory data/$DATETIME ...." >> $CRAWLER_PATH/data/$DATETIME/log.txt
+cp -r $CRAWLER_PATH/input $CRAWLER_PATH/src $CRAWLER_PATH/sh $CRAWLER_PATH/data/$DATETIME
 
 # run crawler
-echo "Start crawler "$1" ...." >> /san_data/research/bmpasini/freshness-crawler/data/$DATETIME/log.txt
-python -u /san_data/research/bmpasini/freshness-crawler/data/$DATETIME/src/crawler.py /san_data/research/bmpasini/freshness-crawler/data/$DATETIME/input/ebolaSeeds.txt 2 >> /san_data/research/bmpasini/freshness-crawler/data/$DATETIME/log.txt 2>&1
+echo "Start crawler "$1" ...." >> $CRAWLER_PATH/data/$DATETIME/log.txt
+python -u -W all -vv $CRAWLER_PATH/data/$DATETIME/src/crawler.py $CRAWLER_PATH/data/$DATETIME/input/ebolaSeeds.txt 2 >> $CRAWLER_PATH/data/$DATETIME/log.txt 2>&1
 
 # print datetime when job finished
-echo "Task finished at: $(date)" >> /san_data/research/bmpasini/freshness-crawler/data/$DATETIME/log.txt
+echo "Task finished at: $(date)" >> $CRAWLER_PATH/data/$DATETIME/log.txt
