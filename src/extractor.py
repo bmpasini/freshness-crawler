@@ -3,7 +3,7 @@ import urllib2
 from bs4 import BeautifulSoup, SoupStrainer
 from urlparse import urljoin
 import json
-from multiprocessing import Process, current_process
+# from multiprocessing import Process, current_process
 import copy_reg
 import types
 import re
@@ -100,7 +100,7 @@ class Extractor(object):
     html, timestamp = self.get_html_from_file(f)
     origin = urllib2.unquote(os.path.basename(os.path.normpath(f)))
     links = self.extract_links(html, origin)
-    process_name = current_process().name
+    process_name = multiprocessing.current_process().name
     self.save_links_temporarily(origin, links, timestamp, process_name)
 
   def save_links_temporarily(self, origin, links, timestamp, process_name):
@@ -119,20 +119,20 @@ class Extractor(object):
       self.get_edges_from_file(f)
 
   def file_splitter(self, files, cores=NUMBER_OF_CORES):
-    files_chunk = [[] for x in range(cores)]
+    files_chunks = [[] for x in range(cores)]
     while files:
       for i in range(cores):
         if files:
-          files_chunk[i].append(files.pop(0))
-    return files_chunk
+          files_chunks[i].append(files.pop(0))
+    return files_chunks
 
   def get_edges_from_files(self, files):
     print "Starting extraction number", str(self.run_number)
     self.create_diretory('tmp_links')
-    files = self.file_splitter(files) # split files in 64 chunks
+    files_chunks = self.file_splitter(files) # split files in 64 chunks
     jobs = []
-    for files_chunk in files:
-      j = Process(target=self.get_edges_from_files_chunk, args=(files_chunk,))
+    for files_chunk in files_chunks:
+      j = multiprocessing.Process(target=self.get_edges_from_files_chunk, args=(files_chunk,))
       jobs.append(j)
       j.start()
     for j in jobs:

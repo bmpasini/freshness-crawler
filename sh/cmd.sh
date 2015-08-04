@@ -14,7 +14,7 @@ java -cp 'lib/*' focusedCrawler.tools.ElasticSearchIndexer --input-dir /san_data
 
 # rsync -avzhe ssh --progress /Users/brunomacedo/Desktop/NYU-Poly/3rd-Semester/Memex/code/memex/ache-search bmpasini@vidaserver1.poly.edu:/san_data/research/bmpasini
 
-# rsync -avzhe ssh --progress bmpasini@vidaserver1.poly.edu:/san_data/research/bmpasini/freshness-crawler/data/20150722152201/tmp/ .
+# rsync -avzhe ssh --progress bmpasini@vidaserver1.poly.edu:/san_data/research/bmpasini/freshness-crawler/data/20150804124603/log.txt .
 
 ache-search - http://ea825b09.ngrok.io/   # http://127.0.0.1:8000
 ElasticSearch - http://3910b316.ngrok.io/ # http://127.0.0.1:9200

@@ -12,6 +12,8 @@ from gevent import monkey
 from gevent.pool import Pool
 from bs4 import BeautifulSoup
 import re
+# from multiprocessing import cpu_count
+# from multiprocessing.dummy import Pool as ThreadPool
 
 gevent.monkey.patch_all(thread=False)
 requests.packages.urllib3.disable_warnings()
@@ -21,6 +23,8 @@ WAIT_SERVER_RESPONSE_TIME = 10 # how long to wait for a server response // 10s a
 
 REGEX_CLASSIFIER = True
 REGEX_WORD = r'ebola'
+
+# NUMBER_OF_CORES = cpu_count()
 
 class Fetcher(object):
 
@@ -122,7 +126,7 @@ class Fetcher(object):
     response_dict = { "html" : html, "headers" : unicode(str(headers), "ISO-8859-1"), "status_code" : status_code, "timestamp" : datetime.now().strftime("%m/%d/%Y %H:%M:%S") }
     return json.dumps(response_dict)
 
-  def gevent_worker(self, url): # reads response, test regex and save html in json format
+  def url_handler(self, url): # reads response, test regex and save html in json format
     try:
       response = requests.get(url, verify=False, timeout=WAIT_SERVER_RESPONSE_TIME)
       response_json = self.read_response(response, url)
@@ -131,28 +135,58 @@ class Fetcher(object):
       if response_json: # proceed if regex test passed
         self.fetched_urls_cnt += 1
         print self.fetched_urls_cnt, "/", self.urls_cnt, ":", url
+        # print url
         self.save_response(url, response_json)
       else:
         print self.fetched_urls_cnt, "/", self.urls_cnt, "(regex failed):", url
+        # print "regex failed:", url
     except IOError:
       pass
     except AttributeError: # skip https sites with invalid ssl certificate
       pass
 
+  # def urls_chunk_handler(self, urls):
+  #   for url in urls:
+  #     self.url_handler(url)
+
+  # def url_splitter(self, urls, cores=NUMBER_OF_CORES):
+  #   urls_chunks = [[] for x in range(cores)]
+  #   while urls:
+  #     for i in range(cores):
+  #       if urls:
+  #         urls_chunks[i].append(urls.pop(0))
+  #   return urls_chunks
+
   def fetch_urls_and_save(self, urls):
-    pool = Pool(1000)
-    for url in urls:
-      pool.spawn(self.gevent_worker, url)
-    pool.join()
-    # jobs = [gevent.spawn(self.gevent_worker, url) for url in urls]
-    # gevent.joinall(jobs)
+    # # using multiprocess threads
+    # pool = ThreadPool(2 * NUMBER_OF_CORES)
+    # pool.map(self.url_handler, urls)
+    # pool.close()
+    # pool.join()
+    # # using multiprocess
+    # urls_chunks = self.url_splitter(urls)
+    # jobs = []
+    # for urls_chunk in urls_chunks:
+    #   j = multiprocessing.Process(target=self.urls_chunk_handler, args=(urls_chunk,))
+    #   jobs.append(j)
+    #   j.start()
+    # for j in jobs:
+    #   j.join()
+    # # using gevent pool
+    # pool = Pool(200)
+    # for url in urls:
+    #   pool.spawn(self.url_handler, url)
+    # pool.join()
+    # # using gevent spawn
+    jobs = [gevent.spawn(self.url_handler, url) for url in urls]
+    gevent.joinall(jobs)
 
   def fetch_and_save_all(self, urls):
     print "Starting fetch number", str(self.run_number)
     while urls != {}:
       next_fetch_urls = self.next_fetch(urls) # { "urls" : [url1, url2, .., urln], "last_fetch" : decreasing # of seconds }
       self.fetch_urls_and_save(next_fetch_urls)
-    print "Fetched", self.urls_cnt, "urls"
+    # print "Fetched", self.urls_cnt, "urls"
 
   def run(self):
     start_time = datetime.now()
