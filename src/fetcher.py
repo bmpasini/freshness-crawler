@@ -18,10 +18,10 @@ import re
 gevent.monkey.patch_all(thread=False)
 requests.packages.urllib3.disable_warnings()
 
-TIMEOUT_DOMAIN_FETCH = 5 # seconds
+TIMEOUT_DOMAIN_FETCH = 0 # seconds
 WAIT_SERVER_RESPONSE_TIME = 10 # how long to wait for a server response // 10s a 30s
 
-REGEX_CLASSIFIER = True
+REGEX_CLASSIFIER = False
 REGEX_WORD = r'ebola'
 
 # NUMBER_OF_CORES = cpu_count()
@@ -120,10 +120,11 @@ class Fetcher(object):
     if REGEX_CLASSIFIER:
       if not self.test_regex(html, url):
         return False # return false if it doesn't pass regex test
-    headers = response.headers
+    headers = unicode(str(response.headers), "ISO-8859-1")
     status_code = response.status_code
+    final_url = unicode(str(response.url), "ISO-8859-1")
     # print status_code
-    response_dict = { "html" : html, "headers" : unicode(str(headers), "ISO-8859-1"), "status_code" : status_code, "timestamp" : datetime.now().strftime("%m/%d/%Y %H:%M:%S") }
+    response_dict = { "html" : html, "headers" : headers, "status_code" : status_code, "timestamp" : datetime.now().strftime("%m/%d/%Y %H:%M:%S"), "url" : final_url }
     return json.dumps(response_dict)
 
   def url_handler(self, url): # reads response, test regex and save html in json format

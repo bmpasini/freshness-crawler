@@ -1,8 +1,11 @@
 tmp/*
 output/*
+seeds/*
 *.pyc
 /log.txt
 /err.txt
 /notes.txt
 /log-no-regex.txt
 /log-with-regex.txt
+/aux/content.rdf.u8
+/nohup.out
